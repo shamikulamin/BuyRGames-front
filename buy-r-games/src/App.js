@@ -1,26 +1,23 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+
 import './App.css';
+import './Include/bootstrap';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { CehckoutComponent } from './Checkout.Component/CheckoutComponent';
+import { HomePage } from './HomePage.Component/HomePage';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <BrowserRouter>
+        <div id="main-content-container">
+          <Switch>
+          <Route path = "/checkout" component={CehckoutComponent} />
+          {/* default */}
+          <Route component={HomePage} />
+          </Switch>
+        </div>
+    </BrowserRouter>
     );
   }
 }
