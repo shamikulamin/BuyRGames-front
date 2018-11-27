@@ -3,6 +3,8 @@ import React from 'react';
 import { Carousel, CarouselCaption, CarouselInner, CarouselItem, View, 
   Mask} from "mdbreact";
 import style from './style';
+import {Link, Route} from 'react-router-dom';
+import Routes from '../Routes';
 
 import {HomeItem} from '../HomeItem.Component/HomeItem';
 
@@ -13,6 +15,7 @@ export class HomePage extends React.Component {
     
     return (
       <>
+      <li><Link to='/search'>Search Component</Link></li>
         <div style={style.carouselStyle}>
           <Carousel activeItem={1} length={4} showControls={true} slide={true} showIndicators={true} className="z-depth-1">
             <CarouselInner>

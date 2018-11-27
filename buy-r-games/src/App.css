@@ -78,3 +78,9 @@ h1:after {
 .card__one:hover::after, .card__one:focus::after {
   opacity: 1;
 }
+
+#stickySidebar {
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
+}
