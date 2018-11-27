@@ -46,10 +46,20 @@ export class SearchResultsComponent extends React.Component {
             this.setState({
                 ...this.state,
                 search: id
+            }, function() { GameClient.get('/games/search/' + this.state.search)
+            .then(resp => {
+                this.setState({
+                    Products: resp.data
+                })
+                // console.log(this.state.Products)
+                this.sort();
             })
-            console.log(this.state.search);
+            .catch(err => {
+                console.log(err);
+            });})
+
         }
-        this.renderData()
+        
     }
 
     renderData() {
@@ -74,8 +84,8 @@ export class SearchResultsComponent extends React.Component {
         this.setState({
             ...this.state,
             search: id
-        })
-        this.renderData();
+        },this.renderData())
+        
     }
 
 

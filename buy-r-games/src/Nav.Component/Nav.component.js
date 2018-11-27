@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import style from "./style";
-import { Button } from 'semantic-ui-react'
+import { FaSearch } from "react-icons/fa";
 
 export class AppNav extends React.Component {
   constructor(props) {
@@ -21,12 +21,13 @@ export class AppNav extends React.Component {
   render() {
     return (
       <nav
-        className="navbar navbar-expand-lg fixed-top p-2"
-        style={style.colorPrimary}
+        className="navbar navbar-expand-lg fixed-top p-0"
+        style={style.colorPrimaryBackground}
       >
         <Link
           to="/home"
-          className="navbar-brand col-sm-3 col-md-2 mr-0"
+          className="navbar-brand col-md-2 margin-right"
+          style={style.white}
           onClick={e => e.preventDefault()}
         >
           Buy R Games
@@ -44,33 +45,36 @@ export class AppNav extends React.Component {
         </button>
 
         <div>
-          <div className="input-group stylish-input-group">
+          <div className="input-group stylish-input-group pt-3">
             <input onChange={this.updateInput}
               className="form-control form-control-dark"
               style={style.searchBar}
               type="text"
               placeholder="Search"
               aria-label="Search"
-              id = "searchBox" 
-              />
-            <span className="input-group-addon form-control form-control-dark">
+              id="searchBox"
+            />
+            <Link to={{ pathname: "/search/" + this.state.inputValue, state: "desiredState" }}>
+              <span className="input-group-addon form-control form-control-dark px-3" style={style.colorPrimary}>
 
-            <Link to={{pathname: "/search/"+this.state.inputValue, state: "desiredState"}}>
-  
-                Search
-              </Link>
 
-              {/* <button >
-                <Link onClick={e => e.preventDefault()} to='/search' className="wrapped-link" id="search" >
-                  Search
-                </Link>
-              </button> */}
-            </span>
+
+                <FaSearch />
+
+              </span>
+            </Link>
           </div>
 
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <div
+            className="collapse navbar-collapse p-2"
+            id="navbarSupportedContent"
+          >
             <div className="nav-item">
-              <Link to="/home" className="unset-anchor nav-link">
+              <Link
+                to="/home"
+                className="unset-anchor nav-link"
+                style={style.white}
+              >
                 Home
               </Link>
             </div>
@@ -108,7 +112,7 @@ export class AppNav extends React.Component {
           {this.signInView()}
           <span className="">
             <button className="btn my-2 my-sm-0">
-              <Link to="/sign-in" className="wrapped-link">
+              <Link to="/cart" className="wrapped-link">
                 Cart
               </Link>
             </button>
