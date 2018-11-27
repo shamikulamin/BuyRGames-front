@@ -27,15 +27,23 @@ export class AppNav extends React.Component {
         >
           <span className="navbar-toggler-icon" />
         </button>
+
         <div>
-          <div>
+          <div className="input-group stylish-input-group">
             <input
-              class="form-control form-control-dark"
+              className="form-control form-control-dark"
               style={style.searchBar}
               type="text"
               placeholder="Search"
               aria-label="Search"
             />
+            <span className="input-group-addon form-control form-control-dark">
+              <button type="submit">
+                <Link to="/search" className="wrapped-link" id="search">
+                  Search
+                </Link>
+              </button>
+            </span>
           </div>
 
           <div className="collapse navbar-collapse" id="navbarSupportedContent">

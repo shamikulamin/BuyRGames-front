@@ -78,3 +78,17 @@ h1:after {
 .card__one:hover::after, .card__one:focus::after {
   opacity: 1;
 }
+
+/* Search Bar Styling */
+.stylish-input-group .input-group-addon{
+  background: white !important; 
+}
+.stylish-input-group .form-control{
+border-right:0; 
+box-shadow:0 0 0; 
+border-color:#ccc;
+}
+.stylish-input-group button{
+  border:0;
+  background:transparent;
+}
