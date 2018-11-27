@@ -7,12 +7,12 @@ export class AppNav extends React.Component {
   render() {
     return (
       <nav
-        className="navbar navbar-expand-lg fixed-top p-0"
+        className="navbar navbar-expand-lg fixed-top p-0 mx-auto"
         style={style.colorPrimaryBackground}
       >
         <Link
           to="/home"
-          className="navbar-brand col-md-2 margin-right"
+          className=""
           style={style.white}
           onClick={e => e.preventDefault()}
         >
@@ -30,7 +30,7 @@ export class AppNav extends React.Component {
           <span className="navbar-toggler-icon" />
         </button>
 
-        <div>
+        <div className="mx-auto px-0">
           <div className="input-group stylish-input-group pt-3">
             <input
               className="form-control form-control-dark"
