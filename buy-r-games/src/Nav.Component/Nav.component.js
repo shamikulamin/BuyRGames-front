@@ -4,6 +4,20 @@ import style from "./style";
 import { Button } from 'semantic-ui-react'
 
 export class AppNav extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      inputValue: ''
+    };
+
+    this.updateInput = this.updateInput.bind(this);
+  }
+
+  updateInput(event) {
+    this.setState({ inputValue: event.target.value })
+  }
+
+
   render() {
     return (
       <nav
@@ -31,19 +45,19 @@ export class AppNav extends React.Component {
 
         <div>
           <div className="input-group stylish-input-group">
-            <input
+            <input onChange={this.updateInput}
               className="form-control form-control-dark"
               style={style.searchBar}
               type="text"
               placeholder="Search"
               aria-label="Search"
-            />
+              id = "searchBox" 
+              />
             <span className="input-group-addon form-control form-control-dark">
 
-              <Link to="/search">
-                <Button >
-                  <p>Search</p>
-                </Button>
+            <Link to={{pathname: "/search/"+this.state.inputValue, state: "desiredState"}}>
+  
+                Search
               </Link>
 
               {/* <button >

@@ -16,7 +16,7 @@ class App extends Component {
           <AppNav />
           <div id="main-content-container">
             <Switch>
-             <Route path="/search" component={SearchResultsComponent}/>
+             <Route path="/search/:id" exact component={SearchResultsComponent}/>
              <Route path = "/cart" component={ShoppingCart} />
               {/* default */}
               <Route component={HomePage} />
