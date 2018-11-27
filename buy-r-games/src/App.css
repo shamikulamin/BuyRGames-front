@@ -79,8 +79,24 @@ h1:after {
   opacity: 1;
 }
 
+<<<<<<< HEAD
 #stickySidebar {
     position: -webkit-sticky; /* Safari */
     position: sticky;
     top: 0;
 }
+=======
+/* Search Bar Styling */
+.stylish-input-group .input-group-addon{
+  background: white !important; 
+}
+.stylish-input-group .form-control{
+border-right:0; 
+box-shadow:0 0 0; 
+border-color:#ccc;
+}
+.stylish-input-group button{
+  border:0;
+  background:transparent;
+}
+>>>>>>> 13cd88b75116c8eed29205916adf4fd89fadca0e
