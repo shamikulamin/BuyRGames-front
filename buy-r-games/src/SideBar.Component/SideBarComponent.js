@@ -1,5 +1,6 @@
 
 import React from 'react';
+import style from '../SideBar.Component/style.css'
 
 export class SideBarComponent extends React.PureComponent {
 
@@ -11,7 +12,7 @@ export class SideBarComponent extends React.PureComponent {
         let labels = [];
 
         for(let i = 0 ; i < keys.length ; i ++){
-            labels.push(<li><button onClick={() => this.clickFunction(data[keys[i]])} >{keys[i]} ({data[keys[i]].length})</button></li>);
+            labels.push(<li><button className = 'button-invis' onClick={() => this.clickFunction(data[keys[i]])} >{keys[i]} ({data[keys[i]].length})</button></li>);
         }
 
         return labels;

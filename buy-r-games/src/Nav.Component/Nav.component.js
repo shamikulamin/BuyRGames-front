@@ -4,6 +4,20 @@ import style from "./style";
 import { FaSearch } from "react-icons/fa";
 
 export class AppNav extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      inputValue: ''
+    };
+
+    this.updateInput = this.updateInput.bind(this);
+  }
+
+  updateInput(event) {
+    this.setState({ inputValue: event.target.value })
+  }
+
+
   render() {
     return (
       <nav
@@ -32,16 +46,21 @@ export class AppNav extends React.Component {
 
         <div className="mx-auto px-0">
           <div className="input-group stylish-input-group pt-3">
-            <input
+            <input onChange={this.updateInput}
               className="form-control form-control-dark"
               style={style.searchBar}
               type="text"
               placeholder="Search"
               aria-label="Search"
+              id="searchBox"
             />
-            <Link to="/search" className="wrapped-link" id="search">
+            <Link to={{ pathname: "/search/" + this.state.inputValue, state: "desiredState" }}>
               <span className="input-group-addon form-control form-control-dark px-3" style={style.colorPrimary}>
-                  <FaSearch />
+
+
+
+                <FaSearch />
+
               </span>
             </Link>
           </div>

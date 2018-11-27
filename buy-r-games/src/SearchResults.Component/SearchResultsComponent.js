@@ -19,9 +19,10 @@ export class SearchResultsComponent extends React.Component {
                 [
 
                 ],
-            loadCount: 0
+            search: ""
         }
     }
+
 
     sort() {
         var sorted = {};
@@ -38,59 +39,90 @@ export class SearchResultsComponent extends React.Component {
         // console.log(this.state.platformSort);
     }
 
-    componentDidMount() {
-
-            console.log("i am here")
-            GameClient.get('/games/search/Mario')
-                .then(resp => {
-                    this.setState({
-                        Products: resp.data
-                    })
-                    // console.log(this.state.Products)
-                    this.sort();
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.location.state === 'desiredState') {
+            const { id } = nextProps.match.params
+            console.log(nextProps.match.params)
+            this.setState({
+                ...this.state,
+                search: id
+            }, function() { GameClient.get('/games/search/' + this.state.search)
+            .then(resp => {
+                this.setState({
+                    Products: resp.data
                 })
-                .catch(err => {
-                    console.log(err);
-                });
+                // console.log(this.state.Products)
+                this.sort();
+            })
+            .catch(err => {
+                console.log(err);
+            });})
 
+        }
+        
+    }
+
+    renderData() {
+
+        console.log(this.state.search)
+        GameClient.get('/games/search/' + this.state.search)
+            .then(resp => {
+                this.setState({
+                    Products: resp.data
+                })
+                // console.log(this.state.Products)
+                this.sort();
+            })
+            .catch(err => {
+                console.log(err);
+            });
+
+    }
+
+    componentDidMount() {
+        const { id } = this.props.match.params
+        this.setState({
+            ...this.state,
+            search: id
+        },this.renderData())
+        
     }
 
 
 
-render() {
+    render() {
+        return (
+            <>
 
-    return (
-        <>
+                <div class="wrapper">
 
-            <div class="wrapper">
+                    <nav id="sidebar">
+                        <SideBarComponent
+                            pSort={this.state}
+                            modifyState={this.modifyState} />
+                    </nav>
 
-                <nav id="sidebar">
-                    <SideBarComponent
-                        pSort={this.state}
-                        modifyState={this.modifyState} />
-                </nav>
+                    <div id="content">
+                        {this.state.Products.map(Products =>
+                            <ItemComponent
+                                key={Products.product_id}
+                                products={Products} />
+                        )
+                        }
+                    </div>
 
-                <div id="content">
-                    {this.state.Products.map(Products =>
-                        <ItemComponent
-                            key={Products.product_id}
-                            products={Products} />
-                    )
-                    }
                 </div>
+            </>
+        );
+    }
 
-            </div>
-        </>
-    );
-}
+    modifyState = (narrowSearch) => {
 
-modifyState = (narrowSearch) => {
-
-    this.setState({
-        ...this.state,
-        Products: narrowSearch
-    })
-    console.log(this.state.Products)
-}
+        this.setState({
+            ...this.state,
+            Products: narrowSearch
+        })
+        console.log(this.state.Products)
+    }
 
 }
