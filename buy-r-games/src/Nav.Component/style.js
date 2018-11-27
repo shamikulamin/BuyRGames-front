@@ -1,11 +1,19 @@
 const style = {
 
     searchBar: {
-      width: '1000px',
+      width: '951px',
       margin: 'auto'
     },
 
+    white: {
+      color: '#FFFFFF',
+    },
+
     colorPrimary: {
+      color: '#2F2E36',
+    },
+
+    colorPrimaryBackground: {
       backgroundColor: '#2F2E36',
       borderColor: '#2F2E36'
     },
