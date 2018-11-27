@@ -112,10 +112,10 @@ export class AppNav extends React.Component {
               Sign Out
             </Link>
           ) : (
-            <Link to="/sign-in" className="wrapped-link" id="login">
-              Sign In
+              <Link to="/sign-in" className="wrapped-link" id="login">
+                Sign In
             </Link>
-          )}
+            )}
         </button>
       </span>
     );
