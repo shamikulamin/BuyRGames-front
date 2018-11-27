@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import style from "./style";
+import { Button } from 'semantic-ui-react'
 
 export class AppNav extends React.Component {
   render() {
@@ -38,11 +39,18 @@ export class AppNav extends React.Component {
               aria-label="Search"
             />
             <span className="input-group-addon form-control form-control-dark">
-              <button type="submit">
-                <Link to="/search" className="wrapped-link" id="search">
+
+              <Link to="/search">
+                <Button >
+                  <p>Search</p>
+                </Button>
+              </Link>
+
+              {/* <button >
+                <Link onClick={e => e.preventDefault()} to='/search' className="wrapped-link" id="search" >
                   Search
                 </Link>
-              </button>
+              </button> */}
             </span>
           </div>
 
@@ -105,10 +113,10 @@ export class AppNav extends React.Component {
               Sign Out
             </Link>
           ) : (
-            <Link to="/sign-in" className="wrapped-link" id="login">
-              Sign In
+              <Link to="/sign-in" className="wrapped-link" id="login">
+                Sign In
             </Link>
-          )}
+            )}
         </button>
       </span>
     );
