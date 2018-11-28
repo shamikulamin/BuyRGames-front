@@ -17,8 +17,8 @@ local.properties
 .loadpath
 .recommenders
 node_modules/
-src/package.json
-src/package-lock.json
+package.json
+package-lock.json
 
 
 
