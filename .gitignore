@@ -17,6 +17,9 @@ local.properties
 .loadpath
 .recommenders
 node_modules/
+src/package.json
+src/package-lock.json
+
 
 
 # External tool builders
