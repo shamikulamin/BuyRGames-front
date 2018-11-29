@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 import { store } from './Redux/Store';
 import ShoppingCartComponent from './ShoppingCart.Component/ShoppingCartComponent';
 import { AppNav } from "./Nav.Component/Nav.component.js";
+import ProductPageComponent from "./ProductPage.Component/ProductPageComponent"
 
 class App extends Component {
   render() {
@@ -19,6 +20,7 @@ class App extends Component {
           <AppNav />
           <div id="main-content-container">
             <Switch>
+              <Route path = "/product" component = {ProductPageComponent}/>
              <Route path="/search/:id" exact component={SearchResultsComponent}/>
              <Route path = "/cart" component={ShoppingCartComponent} />
               {/* default */}

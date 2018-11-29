@@ -4,19 +4,25 @@ import style from '../GameCardComponent/style';
 
 export class GameCardComponent extends React.PureComponent {
 
-    render() {
-      return (
-        <div className="col col-12 col-md-6 col-lg-3 d-flex card__one">   
-          <div  className="card game-card card-deck" >
-            <img style = {style.imgStyle} className="card-img-top" src={this.props.products.product_image_url} alt="Card cap" />
-            <ul className="list-group list-group-flush">
-              <li className="list-group-item">{this.props.products.name}</li>
-              <li className="list-group-item flex-row-sb">
-                <div>${this.props.products.price}</div>
-              </li>
-            </ul>
+  render() {
+    const price = parseFloat(this.props.products.price).toFixed(2);
+    return (
+
+      
+      <div class="card-deck col">
+        <div class="card">
+          <img style={style.imgStyle} class="card-img-top" src={this.props.products.product_image_url} alt="Card cap"/>
+          <div class="card-body">
+            <h5 class="card-title">{this.props.products.name}</h5>
+            <p class="card-text">For: {this.props.products.platform}</p>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">${price}</small>
           </div>
         </div>
-      )
-    }
+      </div>
+
+      
+    )
   }
+}

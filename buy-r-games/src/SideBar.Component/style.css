@@ -73,7 +73,7 @@
   z-index: -1;
 }
 .button-invis:hover, .button-invis:focus {
-  transform: scale3d(1.206, 1.206, 1);
+  transform: scale3d(1.05, 1.05, 1);
   color: dodgerblue;
 }
 .button-invis:hover::after, .button-invis:focus::after {

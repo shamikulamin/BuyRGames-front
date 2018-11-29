@@ -1,7 +1,7 @@
 import React from 'react';
 import '../SearchResults.Component/style.css';
 import GameClient from '../AxiosClients/GameClient';
-import { ItemComponent } from '../Item.Component/ItemComponent';
+import ItemComponent from '../Item.Component/ItemComponent';
 import { SideBarComponent } from '../SideBar.Component/SideBarComponent'
 
 export class SearchResultsComponent extends React.Component {
@@ -39,7 +39,7 @@ export class SearchResultsComponent extends React.Component {
     sortPlatform() {
         var sorted = {};
         for (var i = 0, max = this.state.Products.length; i < max; i++) {
-            if (sorted[this.state.Products[i].platform] == undefined) {
+            if (sorted[this.state.Products[i].platform] === undefined) {
                 sorted[this.state.Products[i].platform] = [];
             }
             sorted[this.state.Products[i].platform].push(this.state.Products[i]);
@@ -53,7 +53,7 @@ export class SearchResultsComponent extends React.Component {
     sortGenre() {
         var sorted = {};
         for (var i = 0, max = this.state.Products.length; i < max; i++) {
-            if (sorted[this.state.Products[i].genre] == undefined) {
+            if (sorted[this.state.Products[i].genre] === undefined) {
                 sorted[this.state.Products[i].genre] = [];
             }
             sorted[this.state.Products[i].genre].push(this.state.Products[i]);
@@ -111,7 +111,6 @@ export class SearchResultsComponent extends React.Component {
     componentWillReceiveProps(nextProps) {
         if (nextProps.location.state === 'desiredState') {
             const { id } = nextProps.match.params
-            console.log(nextProps.match.params)
             this.setState({
                 ...this.state,
                 search: id
@@ -164,7 +163,7 @@ export class SearchResultsComponent extends React.Component {
     render() {
         return (
             <>
-                <div class="wrapper">
+                <div className="wrapper">
 
                     <nav id="sidebar">
                         <SideBarComponent
@@ -177,7 +176,7 @@ export class SearchResultsComponent extends React.Component {
                         <h2 id ="resultHeader" className="text-muted">{this.state.Products.length} Results for <strong>"{this.state.search}</strong>"</h2>
                         {this.state.Products.map(Products =>
                             <ItemComponent
-                                key={Products.product_id}
+                                searchTerm = {this.state.search}
                                 products={Products} />
                         )
                         }
@@ -194,7 +193,6 @@ export class SearchResultsComponent extends React.Component {
             ...this.state,
             Products: narrowSearch
         })
-        console.log(this.state.Products)
     }
 
     removeFilters = () => {

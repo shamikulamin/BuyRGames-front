@@ -1,6 +1,6 @@
 
 import React from 'react';
-import style from '../SideBar.Component/style.css'
+import '../SideBar.Component/style.css'
 
 export class SideBarComponent extends React.PureComponent {
     constructor(props) {
@@ -94,7 +94,6 @@ export class SideBarComponent extends React.PureComponent {
     }
 
     viewAll = () => {
-        console.log("here")
         let x = document.getElementById("filterBtn");
         x.style.display = "none";
         this.props.removeFilters();
@@ -105,12 +104,12 @@ export class SideBarComponent extends React.PureComponent {
 
         return (
             <>
-                <div class="sidebar-header">
+                <div className="sidebar-header">
                     <h3>Narrow Results</h3>
                     <button id='filterBtn' className="btn" onClick={()=> this.viewAll()}><i className="fa fa-close" ></i> Remove Filters</button>
                 </div>
 
-                <ul id="platformUl" class="list-unstyled components">
+                <ul id="platformUl" className="list-unstyled components">
                     <p className = 'border-top border-bottom outset'>Platform</p>
                     {this.populatePlatform()}
                     <p className = 'border-top border-bottom outset'>Genre</p>
