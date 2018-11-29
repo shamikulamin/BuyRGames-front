@@ -6,6 +6,7 @@ import * as navAction from '../Redux/Actions/ShopNav.Action';
 export class ShoppingCartComponent extends React.Component {
   render() {
     const {cart, addingToCart} = this.props
+    console.log(this.props);
     return (
         <>
         <div className = "container">

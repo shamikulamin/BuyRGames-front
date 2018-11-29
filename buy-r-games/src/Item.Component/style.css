@@ -8,3 +8,17 @@
   padding-bottom: 20px;
   padding-top: 20px;
 }
+
+.imgClass{
+  max-width: 120px;
+}
+
+.link:hover {
+  cursor: pointer;
+  color: rgb(87, 58, 255); 
+  text-decoration: underline;
+}
+
+.esrbClass {
+  max-width: 40px;
+}

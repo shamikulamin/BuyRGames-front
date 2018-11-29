@@ -57,8 +57,6 @@ export class AppNav extends React.Component {
             <Link to={{ pathname: "/search/" + this.state.inputValue, state: "desiredState" }}>
               <span className="input-group-addon form-control form-control-dark px-3" style={style.colorPrimary}>
 
-
-
                 <FaSearch />
 
               </span>

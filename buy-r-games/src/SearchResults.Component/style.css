@@ -53,7 +53,7 @@ a:focus {
 ----------------------------------------------------- */
 
 .wrapper {
-    margin-top: 120px;
+    margin-top: 110px;
     display: flex;
     width: 100%;
     align-items: stretch;
@@ -61,10 +61,14 @@ a:focus {
 
 #sidebar {
     min-width: 250px;
-    max-width: 250px;
-    background: #7386D5;
+    max-width: 300px;
+    max-height: 925px;
+    background: #2F2E36;
     color: #fff;
     transition: all 0.3s;
+    padding-left: 0px;
+    padding-right: 0px;
+    
 
 }
 
@@ -74,7 +78,7 @@ a:focus {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #6d7fcc;
+    background: #2F2E36;
 }
 
 #sidebar ul.components {
@@ -150,10 +154,12 @@ a.article:hover {
 ----------------------------------------------------- */
 
 #content {
-    width: 100%;
+    width: 1000px;
     padding: 20px;
     min-height: 100vh;
     transition: all 0.3s;
+    margin-left: 150px;
+    
 }
 
 /* ---------------------------------------------------
@@ -170,4 +176,8 @@ a.article:hover {
     #sidebarCollapse span {
         display: none;
     }
+}
+
+#resultHeader{
+    margin-left: -120px;
 }

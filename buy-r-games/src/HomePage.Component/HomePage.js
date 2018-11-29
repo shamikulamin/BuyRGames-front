@@ -3,8 +3,7 @@ import React from 'react';
 import { Carousel, CarouselCaption, CarouselInner, CarouselItem, View, 
   Mask} from "mdbreact";
 import style from './style';
-import {Link, Route} from 'react-router-dom';
-import Routes from '../Routes';
+import {Link} from 'react-router-dom';
 
 import {HomeItem} from '../HomeItem.Component/HomeItem';
 

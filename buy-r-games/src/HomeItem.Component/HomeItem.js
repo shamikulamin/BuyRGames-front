@@ -1,7 +1,7 @@
 
 import React from 'react';
 import GameClient from '../AxiosClients/GameClient';
-import style from '../HomeItem.Component/style';
+import '../HomeItem.Component/style.css'
 import { GameCardComponent } from '../GameCardComponent/GameCardComponent';
 
 export class HomeItem extends React.Component {
@@ -39,7 +39,6 @@ export class HomeItem extends React.Component {
                 this.setState({
                     PS4Products: resp.data
                 })
-                console.log(this.state.PS4Products)
             })
             .catch(err => {
                 console.log(err);
@@ -50,7 +49,6 @@ export class HomeItem extends React.Component {
                 this.setState({
                     XOneProducts: resp.data
                 })
-                console.log(this.state.XOneProducts)
             })
             .catch(err => {
                 console.log(err);
@@ -61,7 +59,6 @@ export class HomeItem extends React.Component {
                 this.setState({
                     WiiUProducts: resp.data
                 })
-                console.log(this.state.WiiUProducts)
             })
             .catch(err => {
                 console.log(err);
@@ -72,7 +69,6 @@ export class HomeItem extends React.Component {
                 this.setState({
                     PCProducts: resp.data
                 })
-                console.log(this.state.PCProducts)
             })
             .catch(err => {
                 console.log(err);
@@ -83,10 +79,11 @@ export class HomeItem extends React.Component {
 
         return (
             <>
-                <div id = "platformTitle">
-                    <h1 style={style.headerStyle}>Playstation 4</h1>
+                <div id="platformTitle">
+                    <h1 className="headerStyle">Playstation 4</h1>
                 </div>
-                <div style={style.divStyle} className="container">
+
+                <div className="container divStyle">
 
                     <div className="row" >
                         {this.state.PS4Products.map(PS4Products =>
@@ -95,13 +92,12 @@ export class HomeItem extends React.Component {
                                 products={PS4Products} />
                         )
                         }
-
                     </div>
                 </div>
-                <div id = "platformTitle">
-                <h1>Xbox One</h1>
+                <div id="platformTitle">
+                    <h1 className="headerStyle">Xbox One</h1>
                 </div>
-                <div style={style.divStyle} className="container">
+                <div className="container divStyle">
                     <div className="row" >
                         {this.state.XOneProducts.map(XOneProducts =>
                             <GameCardComponent
@@ -113,10 +109,10 @@ export class HomeItem extends React.Component {
                     </div>
                 </div>
 
-               <div id = "platformTitle">
-                <h1>Wii U</h1>
+                <div id="platformTitle">
+                    <h1 className="headerStyle">Wii U</h1>
                 </div>
-                <div style={style.divStyle} className="container">
+                <div className="container divStyle">
                     <div className="row" >
                         {this.state.WiiUProducts.map(WiiUProducts =>
                             <GameCardComponent
@@ -128,10 +124,10 @@ export class HomeItem extends React.Component {
                     </div>
                 </div>
 
-               <div id = "platformTitle">
-                <h1>PC</h1>
+                <div id="platformTitle">
+                    <h1 className="headerStyle">PC</h1>
                 </div>
-                <div style={style.divStyle} className="container">
+                <div className="container divStyle">
                     <div className="row" >
                         {this.state.PCProducts.map(PCProducts =>
                             <GameCardComponent
