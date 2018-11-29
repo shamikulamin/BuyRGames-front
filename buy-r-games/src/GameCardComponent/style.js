@@ -8,7 +8,9 @@ const style = {
   },
 
   imgStyle:{
-    width: '100%',
+    width: '240px',
+    maxHeight: '240px',
+    margin: '0 auto'
     //height: '15vw',
   
   }
