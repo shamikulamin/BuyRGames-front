@@ -8,6 +8,7 @@ import React, { Component } from "react";
 import { Provider } from 'react-redux';
 import { store } from './Redux/Store';
 import ShoppingCartComponent from './ShoppingCart.Component/ShoppingCartComponent';
+import { SignInComponent } from './SignIn.Component/SignInComponent';
 import { AppNav } from "./Nav.Component/Nav.component.js";
 import ProductPageComponent from "./ProductPage.Component/ProductPageComponent"
 
@@ -23,6 +24,7 @@ class App extends Component {
               <Route path = "/product" component = {ProductPageComponent}/>
              <Route path="/search/:id" exact component={SearchResultsComponent}/>
              <Route path = "/cart" component={ShoppingCartComponent} />
+             <Route path = "/sign-in" component={SignInComponent} />
               {/* default */}
               <Route component={HomePage} />
             </Switch>
