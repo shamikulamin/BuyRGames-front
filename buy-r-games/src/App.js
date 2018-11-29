@@ -1,26 +1,37 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+
 import './App.css';
+import './Include/bootstrap';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { HomePage } from './HomePage.Component/HomePage';
+import {SearchResultsComponent} from './SearchResults.Component/SearchResultsComponent'
+import React, { Component } from "react";
+import { Provider } from 'react-redux';
+import { store } from './Redux/Store';
+import ShoppingCartComponent from './ShoppingCart.Component/ShoppingCartComponent';
+import { SignInComponent } from './SignIn.Component/SignInComponent';
+import { AppNav } from "./Nav.Component/Nav.component.js";
+import ProductPageComponent from "./ProductPage.Component/ProductPageComponent"
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Provider store={store}>
+      <BrowserRouter>
+      <>
+          <AppNav />
+          <div id="main-content-container">
+            <Switch>
+              <Route path = "/product" component = {ProductPageComponent}/>
+             <Route path="/search/:id" exact component={SearchResultsComponent}/>
+             <Route path = "/cart" component={ShoppingCartComponent} />
+             <Route path = "/sign-in" component={SignInComponent} />
+              {/* default */}
+              <Route component={HomePage} />
+            </Switch>
+          </div>
+          </>
+      </BrowserRouter>
+      </Provider>
     );
   }
 }
