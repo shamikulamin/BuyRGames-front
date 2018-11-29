@@ -34,20 +34,21 @@ export class ShoppingCartComponent extends React.Component {
             </tbody>
           </table>
         </div>
-        <button onClick= {() =>addingToCart("games")}>rtyuio</button>
-        {console.log(cart)}
+        <button onClick= {() =>addingToCart("games")}>Temp button</button>
         </>
  
     )
   }
 
 }
+//making states in the state store props
 const mapStateToProps = (state) => {
   return {
     cart: state.cartState
   }
 }
  
+
 const mapDispatchToProps = {
   addingToCart: navAction.addingToCart
 }
