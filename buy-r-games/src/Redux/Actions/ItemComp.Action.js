@@ -3,8 +3,7 @@ export const itemCompTypes = {
   }
 
   export const sendToProducts = (productItem, searchQuery) =>{
-    console.log("hello from action");
-
+    
     return {
       type:itemCompTypes.SEND_TO_PRODUCT,
       payload:

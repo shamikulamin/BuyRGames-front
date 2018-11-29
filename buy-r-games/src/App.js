@@ -16,7 +16,7 @@ class App extends Component {
     return (
       <Provider store={store}>
       <BrowserRouter>
-        <>
+      <>
           <AppNav />
           <div id="main-content-container">
             <Switch>
@@ -27,7 +27,7 @@ class App extends Component {
               <Route component={HomePage} />
             </Switch>
           </div>
-        </>
+          </>
       </BrowserRouter>
       </Provider>
     );
