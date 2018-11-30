@@ -2,21 +2,21 @@ import React from "react";
 import { Link } from "react-router-dom";
 import style from "./style";
 import { FaSearch } from "react-icons/fa";
+import { IoMdArrowDropdown } from "react-icons/io";
 
 export class AppNav extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      inputValue: ''
+      inputValue: ""
     };
 
     this.updateInput = this.updateInput.bind(this);
   }
 
   updateInput(event) {
-    this.setState({ inputValue: event.target.value })
+    this.setState({ inputValue: event.target.value });
   }
-
 
   render() {
     return (
@@ -46,7 +46,8 @@ export class AppNav extends React.Component {
 
         <div className="mx-auto px-0">
           <div className="input-group stylish-input-group pt-3">
-            <input onChange={this.updateInput}
+            <input
+              onChange={this.updateInput}
               className="form-control form-control-dark"
               style={style.searchBar}
               type="text"
@@ -54,11 +55,17 @@ export class AppNav extends React.Component {
               aria-label="Search"
               id="searchBox"
             />
-            <Link to={{ pathname: "/search/" + this.state.inputValue, state: "desiredState" }}>
-              <span className="input-group-addon form-control form-control-dark px-3" style={style.colorPrimary}>
-
+            <Link
+              to={{
+                pathname: "/search/" + this.state.inputValue,
+                state: "desiredState"
+              }}
+            >
+              <span
+                className="input-group-addon form-control form-control-dark px-3"
+                style={style.colorPrimary}
+              >
                 <FaSearch />
-
               </span>
             </Link>
           </div>
@@ -108,13 +115,13 @@ export class AppNav extends React.Component {
 
         <div className="float-right">
           {this.signInView()}
-          <span className="">
-            <button className="btn my-2 my-sm-0">
-              <Link to="/cart" className="wrapped-link">
-                Cart
-              </Link>
-            </button>
-          </span>
+          <Link to="/cart" className="wrapped-link">
+            <span className="">
+              <button className="btn my-2 my-sm-0">
+                Cart <span className="badge badge-pill badge-warning">1</span>
+              </button>
+            </span>
+          </Link>
         </div>
       </nav>
     );
@@ -122,19 +129,23 @@ export class AppNav extends React.Component {
 
   signInView() {
     return (
-      <span className="my-2 my-lg-0 p-2">
-        <button className="btn my-2 my-sm-0">
-          {this.props.signedIn === true ? (
-            <Link to="/sign-out" className="wrapped-link" id="login">
-              Sign Out
-            </Link>
-          ) : (
-              <Link to="/sign-in" className="wrapped-link" id="login">
-                Sign In
-            </Link>
-            )}
-        </button>
-      </span>
+      <>
+        {this.props.signedIn === true ? (
+          <Link to="/sign-out" className="wrapped-link" id="login">
+            <span className="my-2 my-lg-0 p-2">
+              <button className="btn my-2 my-sm-0">Sign Out</button>
+            </span>
+          </Link>
+        ) : (
+          <Link to="/sign-in" className="wrapped-link" id="login">
+            <span className="my-2 my-lg-0 p-2">
+              <button className="btn my-2 my-sm-0">
+                Sign In <IoMdArrowDropdown />{" "}
+              </button>
+            </span>
+          </Link>
+        )}
+      </>
     );
   }
 }
