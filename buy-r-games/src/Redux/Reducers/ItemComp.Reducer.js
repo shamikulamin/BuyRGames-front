@@ -6,7 +6,6 @@ const initialState = {
 }
 
 export const itemCompReducer = (state = initialState, action) =>{
-    console.log("hello from reducer");
     switch (action.type) {
         case itemCompTypes.SEND_TO_PRODUCT:
            
