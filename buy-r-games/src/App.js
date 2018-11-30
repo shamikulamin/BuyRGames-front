@@ -11,7 +11,8 @@ import ShoppingCartComponent from './ShoppingCart.Component/ShoppingCartComponen
 import { SignInComponent } from './SignIn.Component/SignInComponent';
 import CreateNewAccountComponent from './CreateNewAccount.Component/CreateNewAccountComponent';
 import UserProfileComponent from './UserProfile.Component/UserProfileComponent';
-import { AppNav } from "./Nav.Component/Nav.component.js";
+import EditLoginComponent from "./EditLogin.Component/EditLoginComponent";
+import AppNav from "./Nav.Component/Nav.component.js";
 import ProductPageComponent from "./ProductPage.Component/ProductPageComponent"
 
 class App extends Component {
@@ -29,6 +30,8 @@ class App extends Component {
              <Route path = "/sign-in" component={SignInComponent} />
              <Route path="/new-account" component={CreateNewAccountComponent}/>
              <Route path="/profile" component={UserProfileComponent}/>
+             <Route path="/edit-login" component={EditLoginComponent}/>
+
               {/* default */}
               <Route component={HomePage} />
             </Switch>

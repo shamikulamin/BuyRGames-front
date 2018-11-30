@@ -35,7 +35,11 @@ export class SignInComponent extends React.Component {
         if (res.status === 200) {
           this.props.history.push("/home");
         }
+        console.log(res);
         return res.json();
+      })
+      .then(data => {
+        console.log(data);
       })
       .catch(err => {
         console.log(err);

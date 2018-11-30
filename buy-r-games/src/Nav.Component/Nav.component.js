@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import style from "./style";
 import { FaSearch } from "react-icons/fa";
 import { IoMdArrowDropdown } from "react-icons/io";
+import { connect } from 'react-redux';
 
 export class AppNav extends React.Component {
   constructor(props) {
@@ -118,7 +119,7 @@ export class AppNav extends React.Component {
           <Link to="/cart" className="wrapped-link">
             <span className="">
               <button className="btn my-2 my-sm-0">
-                Cart <span className="badge badge-pill badge-warning">1</span>
+                Cart <span className="badge badge-pill badge-warning">{this.props.cart.cart.length}</span>
               </button>
             </span>
           </Link>
@@ -149,3 +150,11 @@ export class AppNav extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    cart: state.cartState
+  }
+}
+
+export default connect(mapStateToProps)(AppNav)
