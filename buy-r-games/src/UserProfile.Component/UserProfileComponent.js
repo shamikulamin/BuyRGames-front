@@ -11,8 +11,8 @@ class UserProfileComponent extends Component {
           <div class="col-sm">
             <Link to="/edit-login">
               <div class="col-sm border rounded">
-                <h4>Login</h4>
-                <div>Edit Username, Password, and Email</div>
+                <h4>Login Info</h4>
+                <div>Edit username, password, and email</div>
               </div>
             </Link>
           </div>
