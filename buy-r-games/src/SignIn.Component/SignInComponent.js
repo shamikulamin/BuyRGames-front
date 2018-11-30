@@ -35,33 +35,14 @@ export class SignInComponent extends React.Component {
         if (res.status === 200) {
           this.props.history.push("/home");
         }
+        console.log(res.data.username);
+        sessionStorage.setItem("username", res.data.username);
+        console.log(sessionStorage.getItem("username"));
         return res.json();
       })
       .catch(err => {
         console.log(err);
       });
-    // fetch("http://localhost:8080/ers/users/login", {
-    //   method: "POST",
-    //   body: JSON.stringify(cred),
-    //   headers: {
-    //     "Content-Type": "application/json"
-    //   },
-    //   credentials: "include"
-    // })
-    //   .then(res => {
-    //     if (res.status === 200) {
-    //       this.props.history.push("/home");
-    //     }
-    //     return res.json();
-    //   })
-    //   .then(data => {
-    //     sessionStorage.setItem("userId", data[0]);
-    //     sessionStorage.setItem("userRole", data[1]);
-    //     this.props.signIn();
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
   };
 
   render() {

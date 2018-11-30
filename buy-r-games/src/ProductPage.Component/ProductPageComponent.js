@@ -199,7 +199,7 @@ export class ProductPageComponent extends React.Component {
                             <h6 className="productH6"><strong>Developer:</strong> {this.state.developer}</h6>
                             <h6 className="productH6"> <strong>Publisher:</strong> {this.props.product.item.publisher}</h6>
                             <h6 className="productH6"><strong>Release Year:</strong> {this.props.product.item.releaseyear}</h6>
-                            <div class="row">
+                            <div className="row">
                                 <div className="col-md-8 esrbCol" >
                                     <img className="esrbClass" src={esrbMap[this.props.product.item.esrb_rating]} alt="Card cap" />
                                 </div>
@@ -251,16 +251,16 @@ export class ProductPageComponent extends React.Component {
                         </div>
                     </div>
                     <nav>
-                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <div className="nav nav-tabs" id="nav-tab" role="tablist">
                             {/* <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-detail" role="tab" aria-controls="nav-home" aria-selected="true">Details</a> */}
-                            <a class="nav-item nav-link active" id="nav-contact-tab" data-toggle="tab" href="#nav-reviews" role="tab" aria-controls="nav-contact" aria-selected="false">Reviews</a>
-                            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-videos" role="tab" aria-controls="nav-profile" aria-selected="false">Videos</a>
+                            <a className="nav-item nav-link active" id="nav-contact-tab" data-toggle="tab" href="#nav-reviews" role="tab" aria-controls="nav-contact" aria-selected="false">Reviews</a>
+                            <a className="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-videos" role="tab" aria-controls="nav-profile" aria-selected="false">Videos</a>
 
                         </div>
                     </nav>
-                    <div class="tab-content" id="nav-tabContent">
+                    <div className="tab-content" id="nav-tabContent">
                         {/* <div class="tab-pane fade show active" id="nav-detail" role="tabpanel" aria-labelledby="nav-home-tab">Details</div> */}
-                        <div class="tab-pane fade" id="nav-videos" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <div className="tab-pane fade" id="nav-videos" role="tabpanel" aria-labelledby="nav-profile-tab">
                             <div id="navVids">
                                 {this.state.videos.map(Video =>
                                     <YouTube
