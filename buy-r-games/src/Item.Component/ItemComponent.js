@@ -3,13 +3,14 @@ import '../Item.Component/style.css';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as itemAction from '../Redux/Actions/ItemComp.Action';
+import * as cartAction from '../Redux/Actions/ShopNav.Action';
 
 
 export class ItemComponent extends React.PureComponent {
-
+    
 
     render() {
-        console.log(this.props);
+        const {addToCart} = this.props
         const price = parseFloat(this.props.products.price).toFixed(2);
         const platformMap = {
             "TG16": "TurboGrafx-16",
@@ -73,6 +74,10 @@ export class ItemComponent extends React.PureComponent {
                         <div className="col" id="priceCol">
                             <h5>Buy <strong>for</strong></h5>
                             <h3><strong>${price}</strong></h3>
+
+                            {/* button to add product to cart */}
+                            <button className ="btn btn-danger" onClick = {()=>addToCart(this.props.products)}>Add to Cart</button>
+
                         </div>
                     </div>
                 </span>
@@ -85,12 +90,14 @@ export class ItemComponent extends React.PureComponent {
 const mapStateToProps = (state) => {
     return {
         product: state.product,
-        search: state.searchTerm
+        search: state.searchTerm,
+        cart: state.cartState
     }
 }
 
 const mapDispatchToProps = {
-    itemProduct: itemAction.sendToProducts
+    itemProduct: itemAction.sendToProducts,
+    addToCart: cartAction.addingToCart
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ItemComponent)

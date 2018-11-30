@@ -106,27 +106,10 @@ export class ProductPageComponent extends React.Component {
                 console.log(err);
             });
 
-        GameClient.get('/reviews/' + this.props.product.item.id)
+        GameClient.get('/games/review/' + this.props.product.item.id)
             .then(resp => {
                 this.setState({
-                    reviews: resp.data,
-                }, function () {
-                    let usernames = []
-                    for (let i = 0; i < this.state.reviews.length; i++) {
-                        GameClient.get('/users/' + this.state.reviews[i].userId)
-                            .then(resp => {
-
-                                usernames.push(resp.data)
-                            })
-                            .catch(err => {
-                                console.log(err);
-                            });
-
-                    }
-                    this.setState({
-                        reviewUsernames: usernames
-                    })
-
+                    reviews: resp.data
                 })
 
             })
@@ -137,15 +120,41 @@ export class ProductPageComponent extends React.Component {
 
     }
 
-    postReviews(){
-        let divs = [];
+    structurePost(){
+        let post = []
+        try {
+            for(let i = 0 ; i < this.state.reviews.review.length ; i ++){
+                console.log(this.state.reviews.review[i])
+                post.push(
+                    <div id = "reviewDiv" className = "border-top">
+                         <h6 className="text-muted"><strong>{this.state.reviews.review[i].user.username}</strong> Says:</h6> 
+                         <StarRatings
+                                    id="starRate"
+                                    rating={this.state.reviews.review[i].userRating}
+                                    starRatedColor="yellow"
+                                    changeRating={this.changeRating}
+                                    numberOfStars={5}
+                                    starDimension="20px"
+                                    starSpacing="3px"
+                                    name='rating'
+                                />
 
-        console.log(this.state.reviewUsernames.length)
-        for(let i = 0 ; i < this.state.reviews.length ; i++){
-            divs.push(<div><h4>{this.state.reviewUsernames[i]}</h4></div>)
+                                <span id="rateSpan">{this.state.reviews.review[i].userRating}/5 </span>
+                                <p className = "well">{this.state.reviews.review[i].review}</p>
+                    </div>
+    
+                )
+            }
+            return post
         }
-        return divs;
+        catch(err) {
+            return
+        }
+        
+       
     }
+
+   
 
 
     render() {
@@ -262,7 +271,7 @@ export class ProductPageComponent extends React.Component {
                             </div>
                         </div>
                         <div class="tab-pane fade show active" id="nav-reviews" role="tabpanel" aria-labelledby="nav-contact-tab">
-                            {this.postReviews()}
+                                    {this.structurePost()}
                         </div>
                     </div>
                 </div>
