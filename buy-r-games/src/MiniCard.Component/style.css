@@ -1,0 +1,17 @@
+#miniCardImg {
+    max-width: 70px;
+}
+
+.minih6 {
+    font-size: 12px;
+}
+
+.containerCard {
+    margin-top: 10px;
+}
+
+.textInfo{
+    margin-left: 15px;
+    max-width: 100px;
+    word-wrap: normal;
+}

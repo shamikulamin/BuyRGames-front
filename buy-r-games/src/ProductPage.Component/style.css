@@ -1,3 +1,58 @@
 .container{
     margin-top: 120px;
 }
+
+#gameImg{
+    max-height: 500px;
+    max-width: 600px;
+    margin: 0 auto;
+    display: block;
+}
+
+.productH6{
+    padding-right: 10px;
+    display: inline-block;
+}
+
+.esrbClass {
+    max-width: 57px;
+    display: block;
+  }
+
+.esrbCol {
+    max-width: 40px;
+    padding-right: 75px;
+}
+
+.esrbTags {
+    font-size: 13px;
+}
+
+.esrbSCol {
+    width: 450px;
+}
+
+#rateSpan {
+    margin-left: 25px;
+}
+
+#ratingDiv {
+    padding-top: 5px;
+    max-width: 300px;
+}
+
+.priceInfoCol{
+    margin-top: 50px;
+}
+.relatedCol {
+    margin-top: 50px;
+    width: 250px;
+}
+
+#navVids {
+    margin: 0 auto;
+}
+
+#synop{
+    padding-top: 50px
+}
