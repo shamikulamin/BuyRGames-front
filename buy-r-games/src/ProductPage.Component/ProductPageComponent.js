@@ -33,6 +33,101 @@ export class ProductPageComponent extends React.Component {
     }
 
 
+    componentWillReceiveProps(nextProps) {
+        console.log(nextProps)
+        const header_items = { 'Ocp-Apim-Subscription-Key': '810fb63008844c209116444171e1760f' };
+        let searchTerm = nextProps.product.item.name + " " + nextProps.product.item.releaseyear + " cover"
+        let videoSearchTerm = nextProps.product.item.name + " " + nextProps.product.item.releaseyear + " trailer gameplay"
+        let webSearchTerm = nextProps.product.item.name + " " + nextProps.product.item.releaseyear + " imdb"
+
+        axios.get('https://api.cognitive.microsoft.com/bing/v7.0/search?q=' + webSearchTerm, { headers: header_items })
+            .then(response => {
+                this.setState({
+                    snippet: response.data.webPages.value[0].snippet
+                })
+            })
+            .catch((error) => {
+                console.log('error ' + error);
+            });
+
+        axios.get('https://api.cognitive.microsoft.com/bing/v7.0/images/search?q=' + searchTerm, { headers: header_items })
+            .then(response => {
+                this.setState({
+                    imgUrl: response.data.value[0].contentUrl
+                })
+            })
+            .catch((error) => {
+                console.log('error ' + error);
+            });
+
+        axios.get('https://api.cognitive.microsoft.com/bing/v7.0/videos/search?q=' + videoSearchTerm, { headers: header_items })
+            .then(response => {
+                let topVids = response.data.value.slice(0, 5)
+                let vidList = []
+                for (var i in topVids) {
+                    let str = topVids[i].contentUrl.substring(topVids[i].contentUrl.indexOf("=") + 1);
+                    vidList.push(str)
+                }
+                this.setState({
+                    videos: vidList
+                })
+            })
+            .catch((error) => {
+                console.log('error ' + error);
+            });
+
+
+
+        this.setState({
+            rating: this.props.product.item.critic_score
+        })
+
+
+        if (this.props.product.item.esrb_rating === "") {
+            this.setState({
+                esrbRating: "NR"
+            })
+        }
+        else {
+            this.setState({
+                esrbRating: this.props.product.item.esrb_rating
+            })
+        }
+        if (this.props.product.item.developer === "") {
+            this.setState({
+                developer: this.props.product.item.publisher
+            })
+        }
+        else {
+            this.setState({
+                developer: this.props.product.item.developer
+            })
+        }
+
+        GameClient.get('/games/searchRelated/' + this.props.product.searchTerm)
+            .then(resp => {
+                this.setState({
+                    relatedProducts: resp.data,
+                })
+
+            })
+            .catch(err => {
+                console.log(err);
+            });
+
+        GameClient.get('/games/review/' + this.props.product.item.id)
+            .then(resp => {
+                this.setState({
+                    reviews: resp.data
+                })
+
+            })
+            .catch(err => {
+                console.log(err);
+            });
+
+
+    }
 
     onStarClick(nextValue, prevValue, name) {
         this.setState({ userRating: nextValue });
@@ -256,7 +351,7 @@ export class ProductPageComponent extends React.Component {
             // console.log(newRating)
         }
 
-        const {addToCart} = this.props
+        const { addToCart } = this.props
 
 
         return (
@@ -305,7 +400,7 @@ export class ProductPageComponent extends React.Component {
                         <div className="col-md-auto">
                             <div className="priceInfoCol">
                                 <h3>${price}</h3>
-                                <button className ="btn btn-danger" onClick = {()=>addToCart(this.props.products)}>Add to Cart</button>
+                                <button className="btn btn-danger" onClick={() => addToCart(this.props.products)}>Add to Cart</button>
                             </div>
                         </div>
                         <div className="col col-lg-2">

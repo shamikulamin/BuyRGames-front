@@ -13,6 +13,9 @@ const style = {
     margin: '0 auto'
     //height: '15vw',
   
+  },
+  price:{
+    display: 'inline-block'
   }
 
 };
