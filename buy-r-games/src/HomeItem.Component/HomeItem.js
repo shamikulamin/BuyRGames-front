@@ -2,7 +2,7 @@
 import React from 'react';
 import GameClient from '../AxiosClients/GameClient';
 import '../HomeItem.Component/style.css'
-import { GameCardComponent } from '../GameCardComponent/GameCardComponent';
+import  GameCardComponent  from '../GameCardComponent/GameCardComponent';
 
 export class HomeItem extends React.Component {
 

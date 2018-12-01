@@ -9,9 +9,13 @@ import { Provider } from 'react-redux';
 import { store } from './Redux/Store';
 import ShoppingCartComponent from './ShoppingCart.Component/ShoppingCartComponent';
 import { SignInComponent } from './SignIn.Component/SignInComponent';
-import { AppNav } from "./Nav.Component/Nav.component.js";
+import CreateNewAccountComponent from './CreateNewAccount.Component/CreateNewAccountComponent';
+import UserProfileComponent from './UserProfile.Component/UserProfileComponent';
+import EditLoginComponent from "./EditLogin.Component/EditLoginComponent";
+import AppNav from "./Nav.Component/Nav.component.js";
 import ProductPageComponent from "./ProductPage.Component/ProductPageComponent"
 import { CheckoutComponent } from "./Checkout.Component/CheckoutComponent";
+
 
 class App extends Component {
   render() {
@@ -27,6 +31,10 @@ class App extends Component {
              <Route path = "/cart" component={ShoppingCartComponent} />
              <Route path = "/sign-in" component={SignInComponent} />
              <Route path ="/checkout" component ={CheckoutComponent}/>
+             <Route path="/new-account" component={CreateNewAccountComponent}/>
+             <Route path="/profile" component={UserProfileComponent}/>
+             <Route path="/edit-login" component={EditLoginComponent}/>
+
               {/* default */}
               <Route component={HomePage} />
             </Switch>
