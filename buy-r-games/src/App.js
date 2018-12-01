@@ -14,7 +14,7 @@ import UserProfileComponent from './UserProfile.Component/UserProfileComponent';
 import EditLoginComponent from "./EditLogin.Component/EditLoginComponent";
 import AppNav from "./Nav.Component/Nav.component.js";
 import ProductPageComponent from "./ProductPage.Component/ProductPageComponent"
-import { CheckoutComponent } from "./Checkout.Component/CheckoutComponent";
+import  CheckoutComponent  from "./Checkout.Component/CheckoutComponent";
 
 
 class App extends Component {

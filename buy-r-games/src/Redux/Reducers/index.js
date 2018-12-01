@@ -4,5 +4,5 @@ import { itemCompReducer} from './ItemComp.Reducer';
 
 export const state = combineReducers({
   cartState: shopNavReducer,
-  product: itemCompReducer
+  product: itemCompReducer,
 })

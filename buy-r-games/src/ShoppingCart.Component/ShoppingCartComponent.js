@@ -3,30 +3,25 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as cartAction from '../Redux/Actions/ShopNav.Action';
 import '../ShoppingCart.Component/style.css'
-import { Link } from "react-router-dom";
-import { CheckoutComponent } from '../Checkout.Component/CheckoutComponent';
 
 
 export class ShoppingCartComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      reducedCart:[]
+      reducedCart:[],
+      deepCopy:[]
     }
 }
-
-onlyUnique =(itemInCart,indexOfItem,tempCart) =>{
-  console.log( tempCart.indexOf(itemInCart) ===indexOfItem)
-  if (itemInCart.copies >=1) {
-      itemInCart.copies++;
-    } else {
-      itemInCart.copies = 1;
-    }
-  return tempCart.indexOf(itemInCart) === indexOfItem
+componentDidMount(){
+ this.reduceCart();
+//  localStorage.clear();
 }
 
 reduceCart = () => {
-  let tempCart = this.props.cart.cart.map(item => {
+  let deepCopy = JSON.parse(JSON.stringify(this.props.cart.cart));
+  console.log(deepCopy);
+  let tempCart = deepCopy.map(item => {
     return {
       ...item,
       quantity: 1
@@ -39,28 +34,68 @@ reduceCart = () => {
         item.quantity++;
         return true;
       }
-    })) {
+    })) 
+    {
       reducedCart.push(cur);
     }
   })
+  this.setState({
+    ...this.state,
+    reducedCart,
+    deepCopy
+  })
+  // console.log(this.state.reducedCart)
+}
 
-  // let tempCart = JSON.parse(JSON.stringify(this.props.cart.cart));
-  // console.log(this.props.cart.cart);
-  // console.log(tempCart);
+combineFunctionsAdd = (item) => {
+  this.props.addToCart(item)
+  this.reduceCart();
+}
+
+combineFunctionsSubtract = (item) => {
+  this.props.reduceFromCart(item)
+  this.reduceCart();
+}
+
+routeToCheckout = (e)=>{
+  e.preventDefault()
+  this.props.routeToCheckout(this.state.reducedCart)
+  this.props.history.push("/checkout")
+
+}
+substractFromCart = () =>{
+  let deepCopy = JSON.parse(JSON.stringify(this.props.cart.cart));
+  console.log(deepCopy);
+
+
+
+
+  let tempCart = deepCopy.map(item => {
+    // console.log(item.quantity + "  " + item.name)
+    return {
+      ...item,
+      quantity: item.quantity
+    }
+  });
+  let reducedCart = []
+
+  tempCart = tempCart.forEach(cur => {
+    if(!reducedCart.some(item => {
+      if(item.id === cur.id) {
+        item.quantity--;
+        return true;
+      }
+    })) 
+    {
+      reducedCart.push(cur);
+    }
+  })
   this.setState({
     ...this.state,
     reducedCart
   })
 }
 
-combineFunctions = (item) => {
-  this.reduceCart();
-  this.props.addToCart(item)
-}
-
-componentDidMount(){
-  this.reduceCart();
-}
   render() {
     const {cart,subTotal} = this.props.cart
     const platformMap = {
@@ -113,7 +148,7 @@ componentDidMount(){
         <div className = "container">
         <h1>Shopping Cart</h1>
         {/* <div><CheckoutComponent array = {this.state.reducedCart}/></div> */}
-        <button><Link to ="/checkout">Proceed to Checkout </Link></button>
+        <button onClick ={this.routeToCheckout}>Go to checkout</button>
           <table className = "table">
             <thead className = "thead-dark">
                 <tr>
@@ -140,15 +175,19 @@ componentDidMount(){
                             <img className="esrbClass" src={esrbMap[item.esrb_rating]} alt="Card cap" />
                         </div>
                         <div className="col" id="priceCol">
-                            <h3><strong>${item.price}</strong></h3>
+                            {/* product price */}
+                            <h3><strong>${parseFloat(Math.round(item.price * 100) / 100).toFixed(2)}</strong></h3>
                         </div>
-                            <button className ="quantityBtn">-</button>
+                          {/*substracting from quantity  */}
+                            <button className ="quantityBtn" onClick = {() =>this.combineFunctionsSubtract(item)}>-</button>
                             <span className = "col-2">
                             <input readOnly value ={item.quantity} className="form-control" />
                             </span>
-                            <button className="quantityBtn" onClick = {()=> this.combineFunctions(item)}>+</button>
+                            {/* Adding more quantity */}
+                            <button className="quantityBtn" onClick = {()=> this.combineFunctionsAdd(item)}>+</button>
                         <div>
-                          <h5>{subTotal}</h5>
+                          {/* Total price */}
+                          <h5>${parseFloat(Math.round(subTotal * 100) / 100).toFixed(2)}</h5>
                         </div>
                     </div>
                 </span>
@@ -171,7 +210,9 @@ const mapStateToProps = (state) => {
  
 
 const mapDispatchToProps = {
-  addToCart: cartAction.addingToCart
+  addToCart: cartAction.addingToCart,
+  routeToCheckout: cartAction.routeToCheckout,
+  reduceFromCart: cartAction.deletingFromCart,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCartComponent)
