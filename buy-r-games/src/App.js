@@ -12,6 +12,8 @@ import { SignInComponent } from './SignIn.Component/SignInComponent';
 import CreateNewAccountComponent from './CreateNewAccount.Component/CreateNewAccountComponent';
 import UserProfileComponent from './UserProfile.Component/UserProfileComponent';
 import EditLoginComponent from "./EditLogin.Component/EditLoginComponent";
+import EditLoginSubComponent from "./EditLogin.Component/EditLoginSubComponent";
+import EditAddressesComponent from "./EditAddresses.Component/EditAddressessComponent";
 import AppNav from "./Nav.Component/Nav.component.js";
 import ProductPageComponent from "./ProductPage.Component/ProductPageComponent"
 
@@ -31,6 +33,8 @@ class App extends Component {
              <Route path="/new-account" component={CreateNewAccountComponent}/>
              <Route path="/profile" component={UserProfileComponent}/>
              <Route path="/edit-login" component={EditLoginComponent}/>
+             <Route path="/edit-login-value" component={EditLoginSubComponent}/>
+             <Route path="/edit-addresses" component={EditAddressesComponent}/>
 
               {/* default */}
               <Route component={HomePage} />

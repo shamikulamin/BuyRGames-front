@@ -117,6 +117,50 @@ export class ProductPageComponent extends React.Component {
                 console.log(err);
             });
 
+            // console.log(sessionStorage.getItem("userId"))
+        if (sessionStorage.getItem("userId") !== null) {
+            GameClient.get('/users/recent/' + sessionStorage.getItem("userId"))
+                .then(resp => {
+                    let data = resp.data[0];
+                    console.log(data);
+                    const removeMatching = (value) => {
+                        return this.props.product.item.id !== value;
+                      }
+
+                    if (data.includes(this.props.product.item.id)) {
+                        data = data.filter(removeMatching);
+                        data.unshift(this.props.product.item.id);
+                    } else {
+                        data.pop();
+                        data.unshift(this.props.product.item.id);
+                    }
+
+                    console.log(data);
+
+                    let updateUser = {
+                        userId: sessionStorage.getItem("userId"),
+                        recentlyViewed1: data[0],
+                        recentlyViewed2: data[1],
+                        recentlyViewed3: data[2],
+                        recentlyViewed4: data[3],
+                        recentlyViewed5: data[4]
+                    }
+
+                    console.log(updateUser);
+                    GameClient.post("/users/update/recent", JSON.stringify(updateUser))
+                      .then(res => {
+                          console.log(res);
+                        // return res.json();
+                      })
+                      .catch(err => {
+                        console.log(err);
+                      });
+        
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        }
 
     }
 

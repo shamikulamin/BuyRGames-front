@@ -69,6 +69,7 @@ class CreateNewAccountComponent extends Component {
                 value={this.state.username}
                 onChange={this.usernameChange}
                 id="example-text-input"
+                required
               />
             </div>
           </div>
@@ -87,6 +88,7 @@ class CreateNewAccountComponent extends Component {
                 value={this.state.password}
                 onChange={this.passwordChange}
                 id="example-search-input"
+                required
               />
             </div>
           </div>
@@ -105,6 +107,7 @@ class CreateNewAccountComponent extends Component {
                 value={this.state.email}
                 onChange={this.emailChange}
                 id="example-email-input"
+                required
               />
             </div>
           </div>
