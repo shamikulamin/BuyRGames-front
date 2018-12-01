@@ -16,6 +16,8 @@ import EditLoginSubComponent from "./EditLogin.Component/EditLoginSubComponent";
 import EditAddressesComponent from "./EditAddresses.Component/EditAddressessComponent";
 import AppNav from "./Nav.Component/Nav.component.js";
 import ProductPageComponent from "./ProductPage.Component/ProductPageComponent"
+import  CheckoutComponent  from "./Checkout.Component/CheckoutComponent";
+
 
 class App extends Component {
   render() {
@@ -30,6 +32,7 @@ class App extends Component {
              <Route path="/search/:id" exact component={SearchResultsComponent}/>
              <Route path = "/cart" component={ShoppingCartComponent} />
              <Route path = "/sign-in" component={SignInComponent} />
+             <Route path ="/checkout" component ={CheckoutComponent}/>
              <Route path="/new-account" component={CreateNewAccountComponent}/>
              <Route path="/profile" component={UserProfileComponent}/>
              <Route path="/edit-login" component={EditLoginComponent}/>

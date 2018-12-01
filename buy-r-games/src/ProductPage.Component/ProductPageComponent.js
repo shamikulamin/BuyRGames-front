@@ -6,11 +6,13 @@ import '../ProductPage.Component/style.css'
 import StarRatings from 'react-star-ratings'
 import MiniCardComponent from '../MiniCard.Component/MiniCardComponent';
 import YouTube from 'react-youtube';
-
+import ReactStars from 'react-stars'
+import * as cartAction from '../Redux/Actions/ShopNav.Action';
 
 export class ProductPageComponent extends React.Component {
     constructor(props) {
         super(props);
+
         this.state = {
             imgUrl: "",
             esrbRating: "",
@@ -21,8 +23,114 @@ export class ProductPageComponent extends React.Component {
             videos: [],
             reviews: [],
             reviewUsernames: [],
-            dummyState: ""
+            isHidden: false,
+            userRating: 0,
+            isButtonDisabled: false,
+            submitBtn: "Submit",
+            value: ""
+
         }
+    }
+
+
+    componentWillReceiveProps(nextProps) {
+        console.log(nextProps)
+        const header_items = { 'Ocp-Apim-Subscription-Key': '810fb63008844c209116444171e1760f' };
+        let searchTerm = nextProps.product.item.name + " " + nextProps.product.item.releaseyear + " cover"
+        let videoSearchTerm = nextProps.product.item.name + " " + nextProps.product.item.releaseyear + " trailer gameplay"
+        let webSearchTerm = nextProps.product.item.name + " " + nextProps.product.item.releaseyear + " imdb"
+
+        axios.get('https://api.cognitive.microsoft.com/bing/v7.0/search?q=' + webSearchTerm, { headers: header_items })
+            .then(response => {
+                this.setState({
+                    snippet: response.data.webPages.value[0].snippet
+                })
+            })
+            .catch((error) => {
+                console.log('error ' + error);
+            });
+
+        axios.get('https://api.cognitive.microsoft.com/bing/v7.0/images/search?q=' + searchTerm, { headers: header_items })
+            .then(response => {
+                this.setState({
+                    imgUrl: response.data.value[0].contentUrl
+                })
+            })
+            .catch((error) => {
+                console.log('error ' + error);
+            });
+
+        axios.get('https://api.cognitive.microsoft.com/bing/v7.0/videos/search?q=' + videoSearchTerm, { headers: header_items })
+            .then(response => {
+                let topVids = response.data.value.slice(0, 5)
+                let vidList = []
+                for (var i in topVids) {
+                    let str = topVids[i].contentUrl.substring(topVids[i].contentUrl.indexOf("=") + 1);
+                    vidList.push(str)
+                }
+                this.setState({
+                    videos: vidList
+                })
+            })
+            .catch((error) => {
+                console.log('error ' + error);
+            });
+
+
+
+        this.setState({
+            rating: this.props.product.item.critic_score
+        })
+
+
+        if (this.props.product.item.esrb_rating === "") {
+            this.setState({
+                esrbRating: "NR"
+            })
+        }
+        else {
+            this.setState({
+                esrbRating: this.props.product.item.esrb_rating
+            })
+        }
+        if (this.props.product.item.developer === "") {
+            this.setState({
+                developer: this.props.product.item.publisher
+            })
+        }
+        else {
+            this.setState({
+                developer: this.props.product.item.developer
+            })
+        }
+
+        GameClient.get('/games/searchRelated/' + this.props.product.searchTerm)
+            .then(resp => {
+                this.setState({
+                    relatedProducts: resp.data,
+                })
+
+            })
+            .catch(err => {
+                console.log(err);
+            });
+
+        GameClient.get('/games/review/' + this.props.product.item.id)
+            .then(resp => {
+                this.setState({
+                    reviews: resp.data
+                })
+
+            })
+            .catch(err => {
+                console.log(err);
+            });
+
+
+    }
+
+    onStarClick(nextValue, prevValue, name) {
+        this.setState({ userRating: nextValue });
     }
 
     componentDidMount() {
@@ -164,42 +272,91 @@ export class ProductPageComponent extends React.Component {
 
     }
 
-    structurePost(){
+    structurePost() {
         let post = []
         try {
-            for(let i = 0 ; i < this.state.reviews.review.length ; i ++){
-                console.log(this.state.reviews.review[i])
+            for (let i = 0; i < this.state.reviews.review.length; i++) {
                 post.push(
-                    <div id = "reviewDiv" className = "border-top">
-                         <h6 className="text-muted"><strong>{this.state.reviews.review[i].user.username}</strong> Says:</h6> 
-                         <StarRatings
-                                    id="starRate"
-                                    rating={this.state.reviews.review[i].userRating}
-                                    starRatedColor="yellow"
-                                    changeRating={this.changeRating}
-                                    numberOfStars={5}
-                                    starDimension="20px"
-                                    starSpacing="3px"
-                                    name='rating'
-                                />
+                    <div id="reviewDiv" className="border-top">
+                        <h6 className="text-muted"><strong>{this.state.reviews.review[i].user.username}</strong> Says:</h6>
+                        <StarRatings
+                            id="starRate"
+                            rating={this.state.reviews.review[i].userRating}
+                            starRatedColor="yellow"
+                            changeRating={this.changeRating}
+                            numberOfStars={5}
+                            starDimension="20px"
+                            starSpacing="3px"
+                            name='rating'
+                        />
 
-                                <span id="rateSpan">{this.state.reviews.review[i].userRating}/5 </span>
-                                <p className = "well">{this.state.reviews.review[i].review}</p>
+                        <span id="rateSpan">{this.state.reviews.review[i].userRating}/5 </span>
+                        <p className="well">{this.state.reviews.review[i].review}</p>
                     </div>
-    
+
                 )
             }
             return post
         }
-        catch(err) {
+        catch (err) {
             return
         }
-        
-       
+
+
     }
 
-   
+    reviewToggle() {
+        this.setState({
+            isHidden: !this.state.isHidden
+        })
+    }
 
+    submitReview = (event) => {
+        event.preventDefault();
+        if (sessionStorage.getItem("username") === null) {
+            this.props.history.push('/sign-in')
+        }
+        else {
+
+
+
+            this.setState({
+                isButtonDisabled: true,
+                submitBtn: "Review has been submitted",
+            });
+            let revObj = {
+                reviewId: this.state.reviews.review[this.state.reviews.review.length - 1].reviewId + 1,
+                userId: sessionStorage.getItem("id"),
+                productId: this.props.product.item.id,
+                userRating: this.state.userRating,
+                review: this.state.value
+
+            }
+
+            GameClient.post('/reviews', revObj)
+                .then(res => {
+
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+
+            GameClient.get('/games/review/' + this.props.product.item.id)
+                .then(resp => {
+                    this.setState({
+                        reviews: resp.data
+                    })
+
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        }
+    }
+
+    handleChange = (event) => {
+        this.setState({ value: event.target.value });
+    }
 
     render() {
         const scale_rating = (this.state.rating / 20.00);
@@ -232,6 +389,13 @@ export class ProductPageComponent extends React.Component {
                 autoplay: 0
             }
         };
+
+        const ratingChanged = (newRating) => {
+            this.setState({ userRating: newRating });
+            // console.log(newRating)
+        }
+
+        const { addToCart } = this.props
 
 
         return (
@@ -274,10 +438,13 @@ export class ProductPageComponent extends React.Component {
                                 <h6>{this.state.snippet}</h6>
                             </div>
 
+
+
                         </div>
                         <div className="col-md-auto">
                             <div className="priceInfoCol">
                                 <h3>${price}</h3>
+                                <button className="btn btn-danger" onClick={() => addToCart(this.props.products)}>Add to Cart</button>
                             </div>
                         </div>
                         <div className="col col-lg-2">
@@ -315,7 +482,26 @@ export class ProductPageComponent extends React.Component {
                             </div>
                         </div>
                         <div class="tab-pane fade show active" id="nav-reviews" role="tabpanel" aria-labelledby="nav-contact-tab">
-                                    {this.structurePost()}
+                            <form className="formStyle">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Review this product!</label>
+
+                                    <ReactStars
+                                        count={5}
+                                        onChange={ratingChanged}
+                                        value={this.state.userRating}
+                                        half={false}
+                                        size={24}
+                                        color2={'#ffd700'} />
+
+                                    <textarea
+                                        onChange={this.handleChange.bind(this)} disabled={this.state.isButtonDisabled} type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Write Review" />
+                                    <small id="emailHelp" class="form-text text-muted">You will be redirected to the sign-in page if you are not logged in.</small>
+                                </div>
+                                <button disabled={this.state.isButtonDisabled} onClick={this.submitReview} type="submit" class="btn btn-primary">{this.state.submitBtn}</button>
+                            </form>
+                            <h3>What Customers are saying about this product</h3>
+                            {this.structurePost()}
                         </div>
                     </div>
                 </div>
@@ -333,11 +519,17 @@ export class ProductPageComponent extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        product: state.product
+        product: state.product,
+        cart: state.cartState
     }
 }
 
 
+const mapDispatchToProps = {
+    addToCart: cartAction.addingToCart
+}
 
-export default connect(mapStateToProps)(ProductPageComponent)
+export default connect(mapStateToProps, mapDispatchToProps)(ProductPageComponent)
+
+
 

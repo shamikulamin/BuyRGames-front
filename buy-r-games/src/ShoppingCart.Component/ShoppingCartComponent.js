@@ -1,11 +1,103 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import * as navAction from '../Redux/Actions/ShopNav.Action';
+import * as cartAction from '../Redux/Actions/ShopNav.Action';
+import '../ShoppingCart.Component/style.css'
+
 
 export class ShoppingCartComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      reducedCart:[],
+      deepCopy:[]
+    }
+}
+componentDidMount(){
+ this.reduceCart();
+//  localStorage.clear();
+}
+
+reduceCart = () => {
+  let deepCopy = JSON.parse(JSON.stringify(this.props.cart.cart));
+  console.log(deepCopy);
+  let tempCart = deepCopy.map(item => {
+    return {
+      ...item,
+      quantity: 1
+    }
+  });
+  let reducedCart = []
+  tempCart = tempCart.forEach(cur => {
+    if(!reducedCart.some(item => {
+      if(item.id === cur.id) {
+        item.quantity++;
+        return true;
+      }
+    })) 
+    {
+      reducedCart.push(cur);
+    }
+  })
+  this.setState({
+    ...this.state,
+    reducedCart,
+    deepCopy
+  })
+  // console.log(this.state.reducedCart)
+}
+
+combineFunctionsAdd = (item) => {
+  this.props.addToCart(item)
+  this.reduceCart();
+}
+
+combineFunctionsSubtract = (item) => {
+  this.props.reduceFromCart(item)
+  this.reduceCart();
+}
+
+routeToCheckout = (e)=>{
+  e.preventDefault()
+  this.props.routeToCheckout(this.state.reducedCart)
+  this.props.history.push("/checkout")
+
+}
+substractFromCart = () =>{
+  let deepCopy = JSON.parse(JSON.stringify(this.props.cart.cart));
+  console.log(deepCopy);
+
+
+
+
+  let tempCart = deepCopy.map(item => {
+    // console.log(item.quantity + "  " + item.name)
+    return {
+      ...item,
+      quantity: item.quantity
+    }
+  });
+  let reducedCart = []
+
+  tempCart = tempCart.forEach(cur => {
+    if(!reducedCart.some(item => {
+      if(item.id === cur.id) {
+        item.quantity--;
+        return true;
+      }
+    })) 
+    {
+      reducedCart.push(cur);
+    }
+  })
+  this.setState({
+    ...this.state,
+    reducedCart
+  })
+}
+
   render() {
-    const {cart} = this.props.cart
+    const {cart,subTotal} = this.props.cart
     const platformMap = {
       "TG16": "TurboGrafx-16",
       "PSP": "Sony Playstation Portable",
@@ -51,9 +143,12 @@ export class ShoppingCartComponent extends React.Component {
   }
     return (
         <>
+        {/* <CheckoutComponent reducedCart ={this.state.reducedCart} /> */}
+
         <div className = "container">
         <h1>Shopping Cart</h1>
-        <button>Proceed to Checkout</button>
+        {/* <div><CheckoutComponent array = {this.state.reducedCart}/></div> */}
+        <button onClick ={this.routeToCheckout}>Go to checkout</button>
           <table className = "table">
             <thead className = "thead-dark">
                 <tr>
@@ -63,11 +158,11 @@ export class ShoppingCartComponent extends React.Component {
                     <th>Total</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody></tbody>
+            </table>
                 {
-                  cart.map(item =>
-                    
-                    <div className="container">
+                  this.state.reducedCart.map((item,i) =>
+                    <div className="container" key = {i}>
                 <span >
                     <div id="superBox" className="row block-example border-top  border-dark">
                         <div className="col">
@@ -79,26 +174,27 @@ export class ShoppingCartComponent extends React.Component {
                             <h6 className="text-muted">By {item.publisher}</h6>
                             <img className="esrbClass" src={esrbMap[item.esrb_rating]} alt="Card cap" />
                         </div>
-                        <div>
-                          <button>-</button>
-                          <input readOnly value ="12"/>
-                          <button>+</button>
-                          </div>
-    
                         <div className="col" id="priceCol">
-                            <h5>Buy <strong>for</strong></h5>
-                            <h3><strong>${item.price}</strong></h3>
+                            {/* product price */}
+                            <h3><strong>${parseFloat(Math.round(item.price * 100) / 100).toFixed(2)}</strong></h3>
+                        </div>
+                          {/*substracting from quantity  */}
+                            <button className ="quantityBtn" onClick = {() =>this.combineFunctionsSubtract(item)}>-</button>
+                            <span className = "col-2">
+                            <input readOnly value ={item.quantity} className="form-control" />
+                            </span>
+                            {/* Adding more quantity */}
+                            <button className="quantityBtn" onClick = {()=> this.combineFunctionsAdd(item)}>+</button>
+                        <div>
+                          {/* Total price */}
+                          <h5>${parseFloat(Math.round(subTotal * 100) / 100).toFixed(2)}</h5>
                         </div>
                     </div>
                 </span>
             </div>
 
                   )
-                  }
-
-            </tbody>
-          </table>
-        </div>
+                  }        </div>
         </>
  
     )
@@ -114,6 +210,9 @@ const mapStateToProps = (state) => {
  
 
 const mapDispatchToProps = {
+  addToCart: cartAction.addingToCart,
+  routeToCheckout: cartAction.routeToCheckout,
+  reduceFromCart: cartAction.deletingFromCart,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCartComponent)

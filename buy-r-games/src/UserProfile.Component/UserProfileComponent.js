@@ -52,7 +52,7 @@ class UserProfileComponent extends Component {
       <div style={style.mainStyle} className="container">
         <div className="row mb-4">
           <h3>{sessionStorage.getItem("username")}'s</h3>{" "}
-          <p>Buy R Games profile</p>{" "}
+          <p >Buy R Games profile</p>{" "}
         </div>
         <div className="row">
           <div className="col-sm">
