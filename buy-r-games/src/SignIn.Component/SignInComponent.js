@@ -35,8 +35,9 @@ export class SignInComponent extends React.Component {
         if (res.status === 200) {
           this.props.history.push("/home");
         }
-        console.log(res.data.username);
+        console.log(res.data);
         sessionStorage.setItem("username", res.data.username);
+        sessionStorage.setItem("id", res.data.userId)
         console.log(sessionStorage.getItem("username"));
         return res.json();
       })
