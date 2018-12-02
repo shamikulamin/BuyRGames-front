@@ -35,6 +35,8 @@
 
 #platformTitle {
   margin: auto;
+  margin-top: 25px;
+  margin-bottom: -75px;
   max-width: 1000px;
 }
 

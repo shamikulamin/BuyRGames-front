@@ -25,7 +25,7 @@ export class GameCardComponent extends React.PureComponent {
             <p class="card-text">For: {this.props.products.platform}</p>
           </div>
           <div class="card-footer">
-            <h5 class="text-muted price">${price}</h5> <button className ="btn btn-danger" onClick = {()=>addToCart(this.props.products)}>Add to Cart</button>
+            <h5 className="text-muted price">${price}</h5> <button className ="btn btn-danger" onClick = {()=>addToCart(this.props.products)}>Add to Cart</button>
           </div>
         </div>
       </div>

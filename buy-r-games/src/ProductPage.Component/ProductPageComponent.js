@@ -273,9 +273,6 @@ export class ProductPageComponent extends React.Component {
             this.props.history.push('/sign-in')
         }
         else {
-
-
-
             this.setState({
                 isButtonDisabled: true,
                 submitBtn: "Review has been submitted",
