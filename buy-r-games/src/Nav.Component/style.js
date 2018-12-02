@@ -5,6 +5,14 @@ const style = {
       margin: 'auto'
     },
 
+    customWidthBtn: {
+      width: '90px'
+    },
+
+    customWidthText: {
+      width: '50px'
+    },
+
     white: {
       color: '#FFFFFF',
     },

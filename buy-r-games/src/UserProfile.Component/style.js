@@ -1,7 +1,7 @@
 const style = {
 
     mainStyle: {
-      marginTop: '0px'
+      marginTop: '40px'
     }
 
   };

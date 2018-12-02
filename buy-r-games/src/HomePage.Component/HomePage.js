@@ -15,7 +15,6 @@ export class HomePage extends React.Component {
     
     return (
       <>
-      <li><Link to='/search'>Search Component</Link></li>
         <div id = "carouselStyle">
           <Carousel activeItem={1} length={4} showControls={true} slide={true} showIndicators={true} className="z-depth-1">
             <CarouselInner>

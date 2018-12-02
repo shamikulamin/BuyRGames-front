@@ -79,16 +79,6 @@ class EditAddressesComponent extends Component {
         if (res.status === 200) {
             sessionStorage.setItem("user", JSON.stringify(res.data));
             this.props.history.push("/profile")
-            // this.setState({
-            //     ...this.state,
-            //     firstname: "",
-            //     lastname: "",
-            //     address: "",
-            //     zip: "",
-            //     city: "",
-            //     state: "",
-            //     country: ""
-            // })
           }
         return res.json();
       })
