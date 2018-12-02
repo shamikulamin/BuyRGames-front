@@ -41,7 +41,7 @@ class EditLoginComponent extends Component {
 
         <div className="row">
           <div className="col-12 px-0">
-            <form onSubmit={this.submit} className="col-sm border rounded py-2 d-flex justify-content-between">
+            <form onSubmit={this.submit} className="col-sm border rounded py-2 d-flex justify-content-between align-items-center">
               <div>
                 <span>Username:</span>
                 <br />
@@ -62,7 +62,7 @@ class EditLoginComponent extends Component {
 
         <div className="row">
           <div className="col-12 px-0">
-            <div className="col-sm border rounded py-2 d-flex justify-content-between">
+            <div className="col-sm border rounded py-2 d-flex justify-content-between align-items-center">
               <div>
                 <span>Email:</span>
                 <br />
@@ -81,7 +81,7 @@ class EditLoginComponent extends Component {
 
         <div className="row">
           <div className="col-12 px-0">
-            <div className="col-sm border rounded py-2 d-flex justify-content-between">
+            <div className="col-sm border rounded py-2 d-flex justify-content-between align-items-center">
               <div>
                 <span>Password:</span>
                 <br />

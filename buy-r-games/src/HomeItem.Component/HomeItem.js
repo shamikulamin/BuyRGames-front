@@ -80,10 +80,10 @@ export class HomeItem extends React.Component {
         return (
             <>
                 <div id="platformTitle">
-                    <h1 className="headerStyle">Playstation 4</h1>
+                    <h1 className="headerStyle headerStyleHomeitem mt-1">Playstation 4</h1>
                 </div>
 
-                <div className="container divStyle">
+                <div className="divStyle mt-5 mb-5 pb-5">
 
                     <div className="row" >
                         {this.state.PS4Products.map(PS4Products =>
@@ -95,9 +95,9 @@ export class HomeItem extends React.Component {
                     </div>
                 </div>
                 <div id="platformTitle">
-                    <h1 className="headerStyle">Xbox One</h1>
+                    <h1 className="headerStyle headerStyleHomeitem ">Xbox One</h1>
                 </div>
-                <div className="container divStyle">
+                <div className="divStyle mt-5 mb-5 pb-5">
                     <div className="row" >
                         {this.state.XOneProducts.map(XOneProducts =>
                             <GameCardComponent
@@ -110,9 +110,9 @@ export class HomeItem extends React.Component {
                 </div>
 
                 <div id="platformTitle">
-                    <h1 className="headerStyle">Wii U</h1>
+                    <h1 className="headerStyle headerStyleHomeitem ">Wii U</h1>
                 </div>
-                <div className="container divStyle">
+                <div className="divStyle mt-5 mb-5 pb-5">
                     <div className="row" >
                         {this.state.WiiUProducts.map(WiiUProducts =>
                             <GameCardComponent
@@ -125,9 +125,9 @@ export class HomeItem extends React.Component {
                 </div>
 
                 <div id="platformTitle">
-                    <h1 className="headerStyle">PC</h1>
+                    <h1 className="headerStyle headerStyleHomeitem ">PC</h1>
                 </div>
-                <div className="container divStyle">
+                <div className="divStyle mt-5 mb-5 pb-5">
                     <div className="row" >
                         {this.state.PCProducts.map(PCProducts =>
                             <GameCardComponent

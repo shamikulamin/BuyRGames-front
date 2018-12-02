@@ -38,7 +38,7 @@ export class SideBarComponent extends React.PureComponent {
                 "3DO": "3DO Interactive Multiplayer",
                 "NES": "Nintendo Entertainment System",
                 "SAT": "Sega Saturn",
-                "GC": "Nintendo GameCude"
+                "GC": "Nintendo GameCube"
             },
 
 

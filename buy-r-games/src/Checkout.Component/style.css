@@ -1,10 +1,10 @@
 
-.headerStyle{
+.headerStyleCheckout{
     position: relative;
     text-align: center;
 }
 
-.headerStyle {
+.headerStyleCheckout {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -12,7 +12,7 @@
     padding-top: 20px;
     margin-bottom: -100px;
   }
-  .headerStyle:before, .headerStyle:after {
+  .headerStyleCheckout:before, .headerStyleCheckout:after {
     background-color: #ddd;
     content: '\a0';
     flex-grow: 1;
@@ -20,10 +20,10 @@
     position: relative;
     top: 0.5em;
   }
-  .headerStyle:before {
+  .headerStyleCheckout:before {
     margin-right:10px;
   }
-  .headerStyle:after {
+  .headerStyleCheckout:after {
     margin-left:10px;
   }
 

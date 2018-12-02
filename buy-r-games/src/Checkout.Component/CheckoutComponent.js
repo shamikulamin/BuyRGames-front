@@ -145,7 +145,7 @@ export class CheckoutComponent extends React.Component {
     return (
       <>
         <div id="bigDiv">
-          <h1 className="headerStyle">Buy R Games Checkout</h1>
+          <h1 className="headerStyleCheckout">Buy R Games Checkout</h1>
           {
 
             this.state.uniqueCart.map((item, i) =>
