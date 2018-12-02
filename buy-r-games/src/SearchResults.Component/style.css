@@ -31,7 +31,7 @@ a:focus {
     background: #fff;
     border: none;
     border-radius: 0;
-    margin-bottom: 40px;
+    margin-bottom: 0px;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
@@ -53,7 +53,7 @@ a:focus {
 ----------------------------------------------------- */
 
 .wrapper {
-    margin-top: 110px;
+    margin-top: 0px;
     display: flex;
     width: 100%;
     align-items: stretch;
@@ -62,7 +62,7 @@ a:focus {
 #sidebar {
     min-width: 250px;
     max-width: 300px;
-    max-height: 925px;
+    max-height: 1250px;
     background: #2F2E36;
     color: #fff;
     transition: all 0.3s;

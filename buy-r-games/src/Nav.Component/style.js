@@ -5,8 +5,20 @@ const style = {
       margin: 'auto'
     },
 
+    customWidthBtn: {
+      width: '90px'
+    },
+
+    customWidthText: {
+      width: '50px'
+    },
+
     white: {
-      color: '#FFFFFF',
+      color: '#FFFFFF'
+    },
+
+    paddingRight: {
+      paddingRight: '10px'
     },
 
     colorPrimary: {

@@ -77,6 +77,7 @@ export class ItemComponent extends React.PureComponent {
 
                             {/* button to add product to cart */}
                             <button className ="btn btn-danger" onClick = {()=>addToCart(this.props.products)}>Add to Cart</button>
+                            {/* {console.log(this.props.products)} */}
 
                         </div>
                     </div>
@@ -90,8 +91,7 @@ export class ItemComponent extends React.PureComponent {
 const mapStateToProps = (state) => {
     return {
         product: state.product,
-        search: state.searchTerm,
-        cart: state.cartState
+        search: state.searchTerm
     }
 }
 

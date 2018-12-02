@@ -1,0 +1,30 @@
+.quantityBtn {
+    max-height: 40px;
+}
+
+.container {
+    padding-top: -100px;
+}
+
+.topDiv {
+    margin-top: -40px;
+}
+
+.col1 {
+    margin-left: 270px;
+}
+
+.col2 {
+    margin-left: 475px;
+}
+
+.col3{
+    margin-left: 80px;
+}
+
+.shopH1{
+    display: inline;
+}
+.checkoutBut {
+    margin-left: 60px;
+}

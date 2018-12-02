@@ -1,0 +1,38 @@
+
+.headerStyleCheckout{
+    position: relative;
+    text-align: center;
+}
+
+.headerStyleCheckout {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+    padding-top: 20px;
+    margin-bottom: -100px;
+  }
+  .headerStyleCheckout:before, .headerStyleCheckout:after {
+    background-color: #ddd;
+    content: '\a0';
+    flex-grow: 1;
+    height: 1px;
+    position: relative;
+    top: 0.5em;
+  }
+  .headerStyleCheckout:before {
+    margin-right:10px;
+  }
+  .headerStyleCheckout:after {
+    margin-left:10px;
+  }
+
+  
+#superBox {
+  margin-top:110px;
+}
+
+.results {
+  margin-left: 700px;
+  margin-bottom: 150px;
+}

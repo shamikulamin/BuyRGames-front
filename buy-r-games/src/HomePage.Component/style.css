@@ -1,0 +1,13 @@
+#carouselStyle {
+    width: 1000px;
+    max-height: 583px;
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 80px;
+}
+
+.caroImg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
