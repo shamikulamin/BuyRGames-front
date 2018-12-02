@@ -1,13 +1,4 @@
 
-.divStyle{
-    width: 1000px;
-    margin: 0 auto;
-    margin-bottom: 50px;
-    /* display: flex;
-    justify-content: space-between; */
-    
-}
-
 .headerStyle{
     position: relative;
     text-align: center;
@@ -34,4 +25,17 @@
   }
   .headerStyle:after {
     margin-left:10px;
+  }
+
+  .results {
+    height: 10em;
+    /* position: relative  */
+}
+    .results label {
+    margin-left: -50%;
+    background: yellow;
+    position: absolute;
+    top: 120%;
+    /* margin-right: -50%; */
+    transform: translate(-50%, -50%) 
   }
