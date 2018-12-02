@@ -1,9 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import style from "./style";
 import { FaSearch } from "react-icons/fa";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { connect } from 'react-redux';
+import { Button } from 'reactstrap';
 
 export class AppNav extends React.Component {
   constructor(props) {
@@ -19,10 +20,16 @@ export class AppNav extends React.Component {
     this.setState({ inputValue: event.target.value });
   }
 
+  handleKeyPress = (target) => {
+    if(target.charCode===13){
+          this.props.history.push("/search/" + this.state.inputValue);
+    }
+}
+
   render() {
     return (
       <nav
-        className="navbar navbar-expand-lg fixed-top p-0 mx-auto"
+        className="navbar navbar-expand-lg p-0 mx-auto"
         style={style.colorPrimaryBackground}
       >
         <Link
@@ -55,6 +62,7 @@ export class AppNav extends React.Component {
               placeholder="Search"
               aria-label="Search"
               id="searchBox"
+              onKeyPress={this.handleKeyPress}
             />
             <Link
               to={{
@@ -140,9 +148,9 @@ export class AppNav extends React.Component {
         ) : (
           <Link to="/sign-in" className="wrapped-link" id="login">
             <span className="my-2 my-lg-0 p-2">
-              <button className="btn my-2 my-sm-0">
+              <Button color='warning' className="my-2 my-sm-0">
                 Sign In <IoMdArrowDropdown />{" "}
-              </button>
+              </Button>
             </span>
           </Link>
         )}
@@ -157,4 +165,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(AppNav)
+export default withRouter(connect(mapStateToProps)(AppNav))
