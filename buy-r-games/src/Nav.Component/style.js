@@ -14,7 +14,11 @@ const style = {
     },
 
     white: {
-      color: '#FFFFFF',
+      color: '#FFFFFF'
+    },
+
+    paddingRight: {
+      paddingRight: '10px'
     },
 
     colorPrimary: {

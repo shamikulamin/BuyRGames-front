@@ -17,8 +17,7 @@ import EditAddressesComponent from "./EditAddresses.Component/EditAddressessComp
 import AppNav from "./Nav.Component/Nav.component.js";
 import ProductPageComponent from "./ProductPage.Component/ProductPageComponent"
 import  CheckoutComponent  from "./Checkout.Component/CheckoutComponent";
-import {CompleteOrderComponent} from './CompleteOrder.Component/CompleteOrderComonent'
-
+import ProtectedRoute from "./ProtectedRoute.Component/ProtectedRouteComponent";
 
 class App extends Component {
   render() {
@@ -35,12 +34,11 @@ class App extends Component {
              <Route path = "/sign-in" component={SignInComponent} />
              <Route path ="/checkout" component ={CheckoutComponent}/>
              <Route path="/new-account" component={CreateNewAccountComponent}/>
-             
-             <Route path="/profile" component={UserProfileComponent}/>
-             <Route path="/edit-login" component={EditLoginComponent}/>
-             <Route path="/edit-login-value" component={EditLoginSubComponent}/>
-             <Route path="/edit-addresses" component={EditAddressesComponent}/>
-             <Route path="/redirect" component-={CompleteOrderComponent}/>
+
+             <ProtectedRoute path="/profile" component={UserProfileComponent}/>
+             <ProtectedRoute path="/edit-login" component={EditLoginComponent}/>
+             <ProtectedRoute path="/edit-login-value" component={EditLoginSubComponent}/>
+             <ProtectedRoute path="/edit-addresses" component={EditAddressesComponent}/>
 
               {/* default */}
               <Route component={HomePage} />
