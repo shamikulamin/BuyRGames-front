@@ -32,6 +32,7 @@ export class SignInComponent extends React.Component {
     let cred = this.state;
     GameClient.post("/users/login", JSON.stringify(cred))
       .then(res => {
+        console.log(res.data)
         if (res.status === 200) {
           this.props.history.push("/home");
         }
@@ -39,6 +40,7 @@ export class SignInComponent extends React.Component {
         sessionStorage.setItem("userId", res.data.userId);
         sessionStorage.setItem("user", JSON.stringify(res.data));
         sessionStorage.setItem("id", res.data.userId)
+        sessionStorage.setItem("zip",res.data.zip)
         return res.json();
       })
       .catch(err => {

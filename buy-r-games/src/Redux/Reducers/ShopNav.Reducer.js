@@ -8,7 +8,16 @@ const initialState = {
 export const shopNavReducer = (state = initialState, action) =>{
     let tempCart;
     let tempTotal = 0;
+    console.log("FROM REDUCER")
     switch (action.type) {
+        case shopNavTypes.EMPTY_TO_CART:
+            
+            tempCart = []
+            return{
+                ...state,
+                cart: tempCart,
+                subTotal: 0
+            }
         case shopNavTypes.ADD_TO_CART:
         // console.log(action.payload.item.price);
             tempTotal = 0;
