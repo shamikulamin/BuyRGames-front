@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import { Button } from "reactstrap";
 import * as $ from "jquery";
 import * as logAction from '../Redux/Actions/LoggedIn.Action';
+import * as cartAction from '../Redux/Actions/ShopNav.Action';
 
 export class AppNav extends React.Component {
   constructor(props) {
@@ -39,6 +40,7 @@ export class AppNav extends React.Component {
     this.props.logOut();
     sessionStorage.clear();
     localStorage.clear();
+    this.props.emptyCart();
     this.props.history.push("/home");
   }
 
@@ -48,7 +50,7 @@ export class AppNav extends React.Component {
         className="navbar navbar-expand-lg d-flex justify-content-between align-items-center py-0 my-0"
         style={style.colorPrimaryBackground}
       >
-        <div>
+        <div style={style.paddingRight}>
           <Link to="/home" className="" style={style.white}>
             <div className="p-3">
               <h4 className="my-0"> Buy R Games</h4>
@@ -293,7 +295,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   logIn: logAction.loggingIn,
-  logOut: logAction.loggingOut
+  logOut: logAction.loggingOut,
+  emptyCart: cartAction.emptyCart
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AppNav));
