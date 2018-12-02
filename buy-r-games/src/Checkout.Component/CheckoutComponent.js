@@ -32,12 +32,10 @@ export class CheckoutComponent extends React.Component {
         // pdf.output('dataurlnewwindow');
         pdf.save("invoice.pdf");
       });
-      
+        this.props.emptyCart();
+        this.forceUpdate();
   }
 
-  emptyCart = () => {
-    this.props.emptyCart();
-  }
 
 
   componentDidMount() {
@@ -225,7 +223,7 @@ export class CheckoutComponent extends React.Component {
                   onCancel={onCancel} />
               </div>
             </div>
-            <button onClick={this.emptyCart}>Test Buton</button>
+            <button onClick={this.printDocument}>Test Button</button>
             <div className="row">
               <div className="results">{this.state.paymentStatus ? <label>Payment Has Succeeded.  PaymentID: {this.state.payment.paymentID}</label> : null}</div>
 
@@ -242,12 +240,13 @@ const mapStateToProps = (state) => {
   return {
     reducedCart: state.cartState,
     cart: state.cartState,
-    emptyCart: cartAction.emptyCart
+    
   }
 }
 
 
 const mapDispatchToProps = {
+  emptyCart: cartAction.emptyCart
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CheckoutComponent)
