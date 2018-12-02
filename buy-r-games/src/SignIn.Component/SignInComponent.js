@@ -2,6 +2,8 @@ import React from "react";
 import style from "./style";
 import { Link } from "react-router-dom";
 import GameClient from "../AxiosClients/GameClient";
+import * as logAction from '../Redux/Actions/LoggedIn.Action';
+import { connect } from "react-redux";
 
 export class SignInComponent extends React.Component {
   constructor(props) {
@@ -35,12 +37,13 @@ export class SignInComponent extends React.Component {
         console.log(res.data)
         if (res.status === 200) {
           this.props.history.push("/home");
+          this.props.logIn();
+          sessionStorage.setItem("username", res.data.username);
+          sessionStorage.setItem("userId", res.data.userId);
+          sessionStorage.setItem("user", JSON.stringify(res.data));
+          sessionStorage.setItem("id", res.data.userId)
+          sessionStorage.setItem("zip",res.data.zip)
         }
-        sessionStorage.setItem("username", res.data.username);
-        sessionStorage.setItem("userId", res.data.userId);
-        sessionStorage.setItem("user", JSON.stringify(res.data));
-        sessionStorage.setItem("id", res.data.userId)
-        sessionStorage.setItem("zip",res.data.zip)
         return res.json();
       })
       .catch(err => {
@@ -57,7 +60,7 @@ export class SignInComponent extends React.Component {
           style={style.mainContentStyle}
         >
           <div className="d-flex flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 className="h2 mx-auto">Sign In</h1>
+            <h1 className="h2 mx-auto headerStyleHomeitem ">Sign In</h1>
             <div className="btn-toolbar mb-2 mb-md-0" />
           </div>
 
@@ -91,11 +94,24 @@ export class SignInComponent extends React.Component {
             <button className="btn btn-lg btn-warning btn-block" type="submit">
               Sign In
             </button>
-            <p>Don't have an account? </p>
-            <Link to="new-account">Make One</Link>
+            <p className="mt-1 mb-0">Don't have an account? </p>
+            <Link to="new-account" id="blue">Make One</Link>
           </form>
         </main>
       </>
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    loggedIn: state.loggedIn.loggedIn
+  };
+};
+
+const mapDispatchToProps = {
+  logIn: logAction.loggingIn,
+  logOut: logAction.loggingOut
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignInComponent);

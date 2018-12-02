@@ -8,7 +8,7 @@ import React, { Component } from "react";
 import { Provider } from 'react-redux';
 import { store } from './Redux/Store';
 import ShoppingCartComponent from './ShoppingCart.Component/ShoppingCartComponent';
-import { SignInComponent } from './SignIn.Component/SignInComponent';
+import SignInComponent from './SignIn.Component/SignInComponent';
 import CreateNewAccountComponent from './CreateNewAccount.Component/CreateNewAccountComponent';
 import UserProfileComponent from './UserProfile.Component/UserProfileComponent';
 import EditLoginComponent from "./EditLogin.Component/EditLoginComponent";
@@ -34,6 +34,7 @@ class App extends Component {
              <Route path = "/sign-in" component={SignInComponent} />
              <Route path ="/checkout" component ={CheckoutComponent}/>
              <Route path="/new-account" component={CreateNewAccountComponent}/>
+             
              <Route path="/profile" component={UserProfileComponent}/>
              <Route path="/edit-login" component={EditLoginComponent}/>
              <Route path="/edit-login-value" component={EditLoginSubComponent}/>

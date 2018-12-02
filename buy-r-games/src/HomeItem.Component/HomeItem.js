@@ -80,7 +80,7 @@ export class HomeItem extends React.Component {
         return (
             <>
                 <div id="platformTitle">
-                    <h1 className="headerStyle mt-1">Playstation 4</h1>
+                    <h1 className="headerStyle headerStyleHomeitem mt-1">Playstation 4</h1>
                 </div>
 
                 <div className="divStyle mt-5 mb-5 pb-5">
@@ -95,7 +95,7 @@ export class HomeItem extends React.Component {
                     </div>
                 </div>
                 <div id="platformTitle">
-                    <h1 className="headerStyle">Xbox One</h1>
+                    <h1 className="headerStyle headerStyleHomeitem ">Xbox One</h1>
                 </div>
                 <div className="divStyle mt-5 mb-5 pb-5">
                     <div className="row" >
@@ -110,7 +110,7 @@ export class HomeItem extends React.Component {
                 </div>
 
                 <div id="platformTitle">
-                    <h1 className="headerStyle">Wii U</h1>
+                    <h1 className="headerStyle headerStyleHomeitem ">Wii U</h1>
                 </div>
                 <div className="divStyle mt-5 mb-5 pb-5">
                     <div className="row" >
@@ -125,7 +125,7 @@ export class HomeItem extends React.Component {
                 </div>
 
                 <div id="platformTitle">
-                    <h1 className="headerStyle">PC</h1>
+                    <h1 className="headerStyle headerStyleHomeitem ">PC</h1>
                 </div>
                 <div className="divStyle mt-5 mb-5 pb-5">
                     <div className="row" >

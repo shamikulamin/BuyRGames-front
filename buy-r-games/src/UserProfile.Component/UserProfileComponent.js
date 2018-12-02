@@ -50,8 +50,8 @@ class UserProfileComponent extends Component {
     return (
       <div style={style.mainStyle} className="container">
         <div className="row mb-4">
-          <h3>{sessionStorage.getItem("username")}'s</h3>{" "}
-          <p>Buy R Games profile</p>{" "}
+          <h3>{sessionStorage.getItem("username")}'s</h3>
+          <p style={style.customPositioning}>Buy R Games profile</p>
         </div>
         <div className="row">
           <div className="col-sm">
@@ -86,12 +86,12 @@ class UserProfileComponent extends Component {
             {/* <Link to="/edit-login"> */}
             <div className="col-sm border rounded py-2 d-flex align-items-center">
               <div className="pr-3">
-                <FaRegCreditCard size={40} />
+                <FaRegCreditCard style={style.inactive} size={40} />
               </div>
               <div>
                 {" "}
-                <h4>Payment Method</h4>
-                <div>Edit saved payment option</div>
+                <h4 style={style.inactive} >Payment Method</h4>
+                <div style={style.inactive} >Edit saved payment option</div>
               </div>
             </div>
             {/* </Link> */}

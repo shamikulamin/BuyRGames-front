@@ -6,6 +6,7 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import { connect } from "react-redux";
 import { Button } from "reactstrap";
 import * as $ from "jquery";
+import * as logAction from '../Redux/Actions/LoggedIn.Action';
 
 export class AppNav extends React.Component {
   constructor(props) {
@@ -33,6 +34,13 @@ export class AppNav extends React.Component {
       });
     }
   };
+
+  logOut = () => {
+    this.props.logOut();
+    sessionStorage.clear();
+    localStorage.clear();
+    this.props.history.push("/home");
+  }
 
   render() {
     return (
@@ -216,16 +224,7 @@ export class AppNav extends React.Component {
                 <IoMdArrowDropdown className="pl-1" />
               </Button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <Link to="/sign-in" className="">
-                <button class="dropdown-item" type="button">
-                  Sign In
-                </button>
-                </Link>
-                <Link to="/new-account" className="">
-                <button class="dropdown-item" type="button">
-                  Create Account
-                </button>
-                </Link>
+{this.signInView()}
 
               </div>
             </div>
@@ -249,50 +248,52 @@ export class AppNav extends React.Component {
   }
 
   signInView() {
-    return (
-      <>
-        {this.props.signedIn === true ? (
-          <Link to="/sign-out" className="wrapped-link" id="login">
-            <span className="my-2 my-lg-0 p-2">
-              <button className="btn my-2 my-sm-0">Sign Out</button>
-            </span>
-          </Link>
-        ) : (
-          // <Link to="/sign-in" className="wrapped-link" id="login">
-          <div className="dropdown">
-            <Button
-              color="warning"
-              className="btn pr-2"
-              type="button"
-              data-toggle="dropdown"
-            >
-              My Account
-              <IoMdArrowDropdown className="pl-1" />
-            </Button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <button class="dropdown-item" type="button">
-                Action
-              </button>
-              <button class="dropdown-item" type="button">
-                Action
-              </button>
-              <button class="dropdown-item" type="button">
-                Action
-              </button>
-            </div>
-          </div>
-
-          // </Link>
-        )}
-      </>
-    );
+    console.log(this.props.loggedIn);
+    if (this.props.loggedIn === false) {
+      return (
+        <>
+        <Link to="/new-account" className="">
+        <button class="dropdown-item" type="button">
+          Create Account
+        </button>
+        </Link>
+        <Link to="/sign-in" className="">
+        <button class="dropdown-item" type="button">
+        Sign In
+        </button>
+        </Link>
+        </>
+      )
+    } else {
+      return (
+        <>
+        <Link to="/profile" className="">
+        <button class="dropdown-item" type="button">
+          View Profile
+        </button>
+        </Link>
+        <Link to="/sign-out" className="">
+        <button class="dropdown-item" type="button" onClick={() => this.logOut()}>
+        Sign Out
+        </button>
+        </Link>
+        </>
+      )
+    }
+    
   }
 }
 
 const mapStateToProps = state => {
   return {
-    cart: state.cartState
+    cart: state.cartState,
+    loggedIn: state.loggedIn.loggedIn
   };
 };
 
-export default withRouter(connect(mapStateToProps)(AppNav));
+const mapDispatchToProps = {
+  logIn: logAction.loggingIn,
+  logOut: logAction.loggingOut
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AppNav));
