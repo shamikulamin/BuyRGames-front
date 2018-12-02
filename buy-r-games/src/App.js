@@ -17,6 +17,7 @@ import EditAddressesComponent from "./EditAddresses.Component/EditAddressessComp
 import AppNav from "./Nav.Component/Nav.component.js";
 import ProductPageComponent from "./ProductPage.Component/ProductPageComponent"
 import  CheckoutComponent  from "./Checkout.Component/CheckoutComponent";
+import {CompleteOrderComponent} from './CompleteOrder.Component/CompleteOrderComonent'
 
 
 class App extends Component {
@@ -39,6 +40,7 @@ class App extends Component {
              <Route path="/edit-login" component={EditLoginComponent}/>
              <Route path="/edit-login-value" component={EditLoginSubComponent}/>
              <Route path="/edit-addresses" component={EditAddressesComponent}/>
+             <Route path="/redirect" component-={CompleteOrderComponent}/>
 
               {/* default */}
               <Route component={HomePage} />

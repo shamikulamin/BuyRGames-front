@@ -48,7 +48,7 @@ export const shopNavReducer = (state = initialState, action) =>{
                 }
             }
 
-            for(let i=0; i<tempCart.length; i++) {
+            for(let i=tempCart.length-1; i>=0; i--) {
                 if (action.payload.item.id === tempCart[i].id) {
                     console.log( "  tempcart before")
                     console.log(tempCart)

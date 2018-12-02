@@ -27,12 +27,19 @@
     margin-left:10px;
   }
 
-  
+  .results {
+    height: 10em;
+    /* position: relative  */
+}
+    .results label {
+    margin-left: -50%;
+    background: yellow;
+    position: absolute;
+    top: 120%;
+    /* margin-right: -50%; */
+    transform: translate(-50%, -50%) 
+  }
+
 #superBox {
   margin-top:110px;
-}
-
-.results {
-  margin-left: 700px;
-  margin-bottom: 150px;
 }

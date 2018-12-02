@@ -5,6 +5,8 @@ import PaypalExpressBtn from 'react-paypal-express-checkout';
 import html2canvas from 'html2canvas';
 import * as jsPDF from 'jspdf'
 import * as cartAction from '../Redux/Actions/ShopNav.Action';
+import { Link } from 'react-router-dom';
+
 
 
 export class CheckoutComponent extends React.Component {
@@ -17,7 +19,7 @@ export class CheckoutComponent extends React.Component {
     };
   }
 
-  printDocument=() => {
+  printDocument = () => {
     const size = (this.state.uniqueCart.length)
     const input = document.getElementById('bigDiv');
     html2canvas(input)
@@ -26,17 +28,19 @@ export class CheckoutComponent extends React.Component {
         const pdf = new jsPDF({
           orientation: 'landscape',
           unit: 'in',
-          format: [size*4, 20]
+          format: [size * 4, 20]
         });
         pdf.addImage(imgData, 'JPEG', 0, 0);
-        // pdf.output('dataurlnewwindow');
         pdf.save("invoice.pdf");
+        // pdf.output('dataurlnewwindow');
+        setTimeout(() => {
+          this.props.emptyCart();
+        }, 5000)
+
+
       });
-        this.props.emptyCart();
-        this.forceUpdate();
+
   }
-
-
 
   componentDidMount() {
 
@@ -71,8 +75,8 @@ export class CheckoutComponent extends React.Component {
       // Congratulation, it came here means everything's fine!
       console.log("The payment was succeeded!", payment);
       this.setState({
+        paymentStatus: true,
         payment: payment,
-        paymentStatus: true
       })
       this.printDocument();
       // You can bind the "payment" object's value to your state or props or whatever here, please see below for sample returned data
@@ -223,9 +227,10 @@ export class CheckoutComponent extends React.Component {
                   onCancel={onCancel} />
               </div>
             </div>
-            <button onClick={this.printDocument}>Test Button</button>
             <div className="row">
-              <div className="results">{this.state.paymentStatus ? <label>Payment Has Succeeded.  PaymentID: {this.state.payment.paymentID}</label> : null}</div>
+              <div className="results">{this.state.paymentStatus ? <><label>Payment Has Succeeded.  PaymentID: {this.state.payment.paymentID}</label> <Link id="redirectLink" to='/home'>
+                <h5>Order Successful, please click here to be redirected.</h5>
+              </Link></> : null}</div>
 
             </div>
           </div>
@@ -240,7 +245,7 @@ const mapStateToProps = (state) => {
   return {
     reducedCart: state.cartState,
     cart: state.cartState,
-    
+
   }
 }
 
