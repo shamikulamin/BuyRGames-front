@@ -324,8 +324,15 @@ export class ProductPageComponent extends React.Component {
                 isButtonDisabled: true,
                 submitBtn: "Review has been submitted",
             });
+
+            let revId = 0
+            try{
+                revId = this.state.reviews.review[this.state.reviews.review.length - 1].reviewId + 1
+            } catch{
+                revId = 1;
+            }
             let revObj = {
-                reviewId: this.state.reviews.review[this.state.reviews.review.length - 1].reviewId + 1,
+                reviewId: revId,
                 userId: sessionStorage.getItem("id"),
                 productId: this.props.product.item.id,
                 userRating: this.state.userRating,
